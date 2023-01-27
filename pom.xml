@@ -16,6 +16,8 @@
 
   <properties>
     <java.version>11</java.version>
+    <openapi.generator.maven.plugin.apiPackage>com.github.jacekszymanski.realcamel.api</openapi.generator.maven.plugin.apiPackage>
+    <openapi.generator.maven.plugin.modelPackage>com.github.jacekszymanski.realcamel.model</openapi.generator.maven.plugin.modelPackage>
 
   </properties>
 
@@ -102,6 +104,27 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
+
+      <plugin>
+        <groupId>org.openapitools</groupId>
+        <artifactId>openapi-generator-maven-plugin</artifactId>
+        <version>6.2.1</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>generate</goal>
+            </goals>
+            <configuration>
+              <inputSpec>${project.basedir}/src/main/resources/realworld.yml</inputSpec>
+              <generatorName>java-camel</generatorName>
+              <configOptions>
+                <sourceFolder>src/gen/java</sourceFolder>
+              </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 

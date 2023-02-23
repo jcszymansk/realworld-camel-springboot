@@ -39,7 +39,7 @@ public class EmptyRoutes extends RouteBuilder {
     routeTemplate("emptyRouteTemplate").
         templateParameter("startUri").
         from("{{startUri}}").
-        log("{{startUri}} was called");
+        log("{{startUri}} was called, body ${body} headers ${headers}");
 
 
     for (String starterUri : STARTER_URIS) {

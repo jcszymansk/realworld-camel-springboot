@@ -7,6 +7,17 @@ camel:
     mapping:
       contextPath: /api/*
 
+spring:
+
+  datasource:
+    url: jdbc:h2:file:./target/conduit.h2;AUTO_SERVER=TRUE
+
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: update
+
+
 
 management:
   endpoints:

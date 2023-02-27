@@ -93,6 +93,14 @@
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-jackson-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-language-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-groovy-starter</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>com.h2database</groupId>
@@ -167,7 +175,7 @@
           </execution>
         </executions>
       </plugin>
-
+      
     </plugins>
   </build>
 

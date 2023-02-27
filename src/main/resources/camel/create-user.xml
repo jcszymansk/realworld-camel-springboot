@@ -9,7 +9,19 @@
 
     <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?usePersist=true" />
 
-    <log message="transformed ${body}" />
+    <log message="created ${body}" loggingLevel="DEBUG" logName="com.github.jacekszymanski.realcamel" />
+
+    <marshal><json /></marshal>
+    <to uri="jsonata:jsonata/create-user-resp.jsonata?inputType=JsonString" />
+
+    <log message="transformed ${body}" loggingLevel="DEBUG" logName="com.github.jacekszymanski.realcamel" />
+
+    <unmarshal>
+      <json unmarshalType="com.github.jacekszymanski.realcamel.model.Login200Response"
+            disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"/>
+    </unmarshal>
+
+    <to uri="language:groovy:request.body.user.token = request.body.user.username?transform=false" />
 
   </route>
 </routes>

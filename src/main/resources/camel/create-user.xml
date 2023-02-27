@@ -1,0 +1,15 @@
+<routes xmlns="http://camel.apache.org/schema/spring/v3.20">
+  <route id="direct_createUser">
+    <from uri="direct:createUser"/>
+
+    <marshal><json /></marshal>
+    <to uri="jsonata:jsonata/create-user-req2db.jsonata?inputType=JsonString" />
+
+    <unmarshal><json library="Jackson" unmarshalType="com.github.jacekszymanski.realcamel.entity.User" /></unmarshal>
+
+    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?usePersist=true" />
+
+    <log message="transformed ${body}" />
+
+  </route>
+</routes>

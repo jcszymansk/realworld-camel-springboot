@@ -2,6 +2,7 @@ package com.github.jacekszymanski.realcamel.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
@@ -9,6 +10,7 @@ import javax.persistence.MappedSuperclass;
 public class Base {
 
   @Id
+  @GeneratedValue
   @JsonIgnore
   private Long id;
 

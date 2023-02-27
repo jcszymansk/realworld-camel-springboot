@@ -63,4 +63,14 @@ public class User extends Base {
   public void setImage(byte[] image) {
     this.image = image;
   }
+
+  @Override
+  public String toString() {
+    return "User{" +
+        "username='" + username + '\'' +
+        ", password='" + password + '\'' +
+        ", email='" + email + '\'' +
+        ", bio='" + bio + '\'' +
+        '}';
+  }
 }

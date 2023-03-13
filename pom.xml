@@ -101,6 +101,14 @@
       <groupId>org.apache.camel.springboot</groupId>
       <artifactId>camel-groovy-starter</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-xml-io-dsl-starter</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-debug-starter</artifactId>
+    </dependency>
 
     <dependency>
       <groupId>com.h2database</groupId>
@@ -175,7 +183,7 @@
           </execution>
         </executions>
       </plugin>
-      
+
     </plugins>
   </build>
 

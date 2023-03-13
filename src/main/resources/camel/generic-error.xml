@@ -13,14 +13,24 @@
       </setHeader>
 
       <setBody>
-        <simple><![CDATA[
-          {"errors": {"body": [ "${exception.message}" ]}}
-        ]]></simple>
+        <constant><![CDATA[
+          {"errors": {"body": [ ]}}
+        ]]></constant>
       </setBody>
 
       <unmarshal>
         <json unmarshalType="com.github.jacekszymanski.realcamel.model.GenericErrorModel"/>
       </unmarshal>
+
+      <script>
+        <groovy>
+          <![CDATA[
+            import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.*
+
+            request.body.errors.body.addAll(messages(exception(exchange)))
+          ]]>
+        </groovy>
+      </script>
 
       <stop/>
     </onException>

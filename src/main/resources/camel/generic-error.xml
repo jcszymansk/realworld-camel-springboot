@@ -14,8 +14,8 @@
 
       <setBody>
         <simple><![CDATA[
-        {"errors": {"body": [ "${exception.message}" ]}}
-      ]]></simple>
+          {"errors": {"body": [ "${exception.message}" ]}}
+        ]]></simple>
       </setBody>
 
       <unmarshal>

@@ -18,7 +18,7 @@
 
     <unmarshal>
       <json unmarshalType="com.github.jacekszymanski.realcamel.model.Login200Response"
-            disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"/>
+          disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"/>
     </unmarshal>
 
     <to uri="language:groovy:request.body.user.token = request.body.user.username?transform=false" />

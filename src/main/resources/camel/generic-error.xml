@@ -1,0 +1,28 @@
+<routeConfigurations>
+  <routeConfiguration id="generic-error">
+    <onException>
+      <exception>java.lang.Exception</exception>
+      <handled>
+        <constant>true</constant>
+      </handled>
+
+      <log message="exception ${exception}" logName="com.github.jacekszymanski.realcamel" loggingLevel="WARN"/>
+
+      <setHeader name="CamelHttpResponseCode">
+        <constant>422</constant>
+      </setHeader>
+
+      <setBody>
+        <simple><![CDATA[
+        {"errors": {"body": [ "${exception.message}" ]}}
+      ]]></simple>
+      </setBody>
+
+      <unmarshal>
+        <json unmarshalType="com.github.jacekszymanski.realcamel.model.GenericErrorModel"/>
+      </unmarshal>
+
+      <stop/>
+    </onException>
+  </routeConfiguration>
+</routeConfigurations>

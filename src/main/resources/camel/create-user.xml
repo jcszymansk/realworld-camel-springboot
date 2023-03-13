@@ -1,5 +1,5 @@
-<routes xmlns="http://camel.apache.org/schema/spring/v3.20">
-  <route id="direct_createUser">
+<routes>
+  <route id="direct_createUser" routeConfigurationId="generic-error">
     <from uri="direct:createUser"/>
 
     <marshal><json /></marshal>

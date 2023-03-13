@@ -1,9 +1,9 @@
 camel:
   springboot:
     name: Conduit Backend Camel implementation
-    sourceLocationEnabled: true
     startup-summary-level: verbose
     dump-routes: true
+    routes-include-pattern: classpath:camel/*.xml
 
   servlet:
     mapping:

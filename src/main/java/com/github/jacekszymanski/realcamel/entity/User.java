@@ -1,12 +1,10 @@
 package com.github.jacekszymanski.realcamel.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Lob;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
+@NamedQuery(name = "selectUser", query = "select u from User u where u.email = :email")
 public class User extends Base {
   @Column(nullable = false, unique = true)
   private String username;

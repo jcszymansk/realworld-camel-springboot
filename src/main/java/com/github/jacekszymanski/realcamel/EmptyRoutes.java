@@ -29,7 +29,7 @@ public class EmptyRoutes extends RouteBuilder {
       "direct:getTags",
       //"direct:createUser",
       "direct:getCurrentUser",
-      "direct:login",
+      //"direct:login",
       "direct:updateCurrentUser"
   );
 

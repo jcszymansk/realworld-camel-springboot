@@ -1,0 +1,18 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+  <route id="direct_login" routeConfigurationId="generic-error">
+    <from uri="direct:login" />
+
+    <log message="received ${body}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG" />
+
+    <marshal><json library="Jackson" /></marshal>
+    <unmarshal><json library="Jackson" unmarshalType="java.util.Map" /></unmarshal>
+
+    <setProperty name="user">
+      <simple>${body['user']}</simple>
+    </setProperty>
+    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectUser&amp;parameters.email=${exchangeProperty.user['email']}" />
+
+    <log message="selected ${body}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG" />
+
+  </route>
+</routes>

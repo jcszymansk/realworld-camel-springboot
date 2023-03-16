@@ -11,6 +11,10 @@
 
     <log message="created ${body}" loggingLevel="DEBUG" logName="com.github.jacekszymanski.realcamel" />
 
+    <setHeader name="CamelHttpResponseCode">
+      <constant>201</constant>
+    </setHeader>
+
     <to uri="direct:loginUser" />
   </route>
 </routes>

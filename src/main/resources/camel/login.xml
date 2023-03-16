@@ -19,21 +19,7 @@
         ${body.size} == 0 || ${body[0].password} != ${exchangeProperty.user['password']}
       ]]></simple>
 
-      <setHeader name="CamelHttpResponseCode">
-        <constant>401</constant>
-      </setHeader>
-
-      <setBody>
-        <constant><![CDATA[
-          {"errors": {"body": [ "Bad login" ]}}
-        ]]></constant>
-      </setBody>
-
-      <unmarshal>
-        <json unmarshalType="com.github.jacekszymanski.realcamel.model.GenericErrorModel"/>
-      </unmarshal>
-
-      <stop />
+      <throwException message="Bad login" exceptionType="com.github.jacekszymanski.realcamel.UnauthorizedException" />
 
     </filter>
 

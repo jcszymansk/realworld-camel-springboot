@@ -1,6 +1,21 @@
 <routeConfigurations>
   <routeConfiguration id="generic-error">
     <onException>
+      <exception>com.github.jacekszymanski.realcamel.RouteException</exception>
+      <handled>
+        <constant>true</constant>
+      </handled>
+
+      <log message="exception ${exception}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG"/>
+
+      <setHeader name="CamelHttpResponseCode">
+        <simple>${exception.reason}</simple>
+      </setHeader>
+
+      <to uri="direct:returnError" />
+    </onException>
+
+    <onException>
       <exception>java.lang.Exception</exception>
       <handled>
         <constant>true</constant>
@@ -9,30 +24,12 @@
       <log message="exception ${exception}" logName="com.github.jacekszymanski.realcamel" loggingLevel="WARN"/>
 
       <setHeader name="CamelHttpResponseCode">
-        <constant>422</constant>
+        <constant>500</constant>
       </setHeader>
 
-      <setBody>
-        <constant><![CDATA[
-          {"errors": {"body": [ ]}}
-        ]]></constant>
-      </setBody>
-
-      <unmarshal>
-        <json unmarshalType="com.github.jacekszymanski.realcamel.model.GenericErrorModel"/>
-      </unmarshal>
-
-      <script>
-        <groovy>
-          <![CDATA[
-            import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.*
-
-            request.body.errors.body.addAll(messages(exception(exchange)))
-          ]]>
-        </groovy>
-      </script>
-
-      <stop/>
+      <to uri="direct:returnError" />
     </onException>
+
+
   </routeConfiguration>
 </routeConfigurations>

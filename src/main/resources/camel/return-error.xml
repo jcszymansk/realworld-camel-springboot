@@ -1,0 +1,28 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+  <route id="direct:returnError">
+    <from uri="direct:returnError" />
+
+    <setBody>
+      <constant><![CDATA[
+          {"errors": {"body": [ ]}}
+        ]]></constant>
+    </setBody>
+
+    <unmarshal>
+      <json unmarshalType="com.github.jacekszymanski.realcamel.model.GenericErrorModel"/>
+    </unmarshal>
+
+    <script>
+      <groovy>
+        <![CDATA[
+            import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.*
+
+            request.body.errors.body.addAll(messages(exception(exchange)))
+          ]]>
+      </groovy>
+    </script>
+
+    <stop/>
+
+  </route>
+</routes>

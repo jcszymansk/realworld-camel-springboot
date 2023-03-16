@@ -3,7 +3,12 @@ camel:
     name: Conduit Backend Camel implementation
     startup-summary-level: verbose
     dump-routes: true
+
     routes-include-pattern: classpath:camel/*.xml
+    routes-reload-directory: src/main/resources/camel
+    routes-reload-enabled: true
+    routes-reload-pattern: "*.xml"
+    routes-reload-remove-all-routes: false
 
   servlet:
     mapping:

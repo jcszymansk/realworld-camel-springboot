@@ -28,7 +28,7 @@ public class EmptyRoutes extends RouteBuilder {
       "direct:unfollowUserByUsername",
       "direct:getTags",
       //"direct:createUser",
-      "direct:getCurrentUser",
+      //"direct:getCurrentUser",
       //"direct:login",
       "direct:updateCurrentUser"
   );

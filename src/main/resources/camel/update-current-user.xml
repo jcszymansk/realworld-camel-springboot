@@ -1,0 +1,48 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+  <route id="direct_updateCurrentUser" routeConfigurationId="generic-error">
+    <from uri="direct:updateCurrentUser"/>
+
+    <marshal><json library="Jackson" /></marshal>
+    <unmarshal><json library="Jackson" unmarshalType="java.util.Map" /></unmarshal>
+
+    <log message="auth ${header.Authorization}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG"/>
+
+    <to uri="direct:verifyLogin" />
+
+    <log message="body ${body}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG"/>
+
+    <script>
+      <groovy>resource:classpath:scripts/update-user.groovy</groovy>
+    </script>
+
+    <setBody>
+      <exchangeProperty>loggedInUser</exchangeProperty>
+    </setBody>
+
+    <doTry>
+      <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User" />
+      <doCatch>
+        <exception>org.hibernate.exception.ConstraintViolationException</exception>
+
+        <setProperty name="rethrow">
+          <simple>${exception}</simple>
+        </setProperty>
+      </doCatch>
+    </doTry>
+
+    <filter>
+      <simple>${exchangeProperty.rethrow} != null</simple>
+
+      <script>
+        <groovy><![CDATA[
+            import com.github.jacekszymanski.realcamel.RouteException
+            import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.exception
+
+            throw new RouteException("user or email already taken", exception(exchange))
+          ]]></groovy>
+      </script>
+    </filter>
+
+    <to uri="direct:loginUser" />
+  </route>
+</routes>

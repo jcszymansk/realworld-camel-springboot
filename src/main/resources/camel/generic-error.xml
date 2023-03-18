@@ -21,7 +21,8 @@
         <constant>true</constant>
       </handled>
 
-      <log message="exception ${exception}" logName="com.github.jacekszymanski.realcamel" loggingLevel="WARN"/>
+      <log message="exception ${exception} ${messageHistory} ${exception.stacktrace}"
+           logName="com.github.jacekszymanski.realcamel" loggingLevel="WARN"/>
 
       <setHeader name="CamelHttpResponseCode">
         <constant>500</constant>

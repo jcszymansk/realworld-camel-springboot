@@ -1,0 +1,30 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+  <route id="direct_saveUser" routeConfigurationId="generic-error">
+    <from uri="direct:saveUser" />
+
+    <doTry>
+      <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User" />
+      <doCatch>
+        <exception>org.hibernate.exception.ConstraintViolationException</exception>
+
+        <setProperty name="rethrow">
+          <simple>${exception}</simple>
+        </setProperty>
+      </doCatch>
+    </doTry>
+
+    <filter>
+      <simple>${exchangeProperty.rethrow} != null</simple>
+
+      <script>
+        <groovy><![CDATA[
+            import com.github.jacekszymanski.realcamel.RouteException
+            import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.exception
+
+            throw new RouteException("user or email already taken", exception(exchange))
+          ]]></groovy>
+      </script>
+    </filter>
+
+  </route>
+</routes>

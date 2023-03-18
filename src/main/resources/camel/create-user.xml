@@ -7,30 +7,7 @@
 
     <unmarshal><json library="Jackson" unmarshalType="com.github.jacekszymanski.realcamel.entity.User" /></unmarshal>
 
-    <doTry>
-      <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?usePersist=true" />
-      <doCatch>
-        <exception>org.hibernate.exception.ConstraintViolationException</exception>
-
-        <setProperty name="rethrow">
-          <simple>${exception}</simple>
-        </setProperty>
-      </doCatch>
-    </doTry>
-
-    <filter>
-      <simple>${exchangeProperty.rethrow} != null</simple>
-
-      <script>
-        <groovy><![CDATA[
-            import com.github.jacekszymanski.realcamel.RouteException
-            import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.exception
-
-            throw new RouteException("user already exists", exception(exchange))
-          ]]></groovy>
-      </script>
-    </filter>
-
+    <to uri="direct:saveUser" />
     <log message="created ${body}" loggingLevel="DEBUG" logName="com.github.jacekszymanski.realcamel" />
 
     <to uri="direct:loginUser" />

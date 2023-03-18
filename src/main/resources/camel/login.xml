@@ -10,7 +10,7 @@
     <setProperty name="user">
       <simple>${body['user']}</simple>
     </setProperty>
-    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectUser&amp;parameters.email=${exchangeProperty.user['email']}" />
+    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByEmail&amp;parameters.email=${exchangeProperty.user['email']}" />
 
     <log message="selected ${body} size ${body.size}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG" />
 

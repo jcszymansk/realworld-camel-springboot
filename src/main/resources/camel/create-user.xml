@@ -1,5 +1,5 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_createUser" routeConfigurationId="generic-error">
+  <route id="direct_createUser" routeConfigurationId="generic-error,return-201">
     <from uri="direct:createUser"/>
 
     <marshal><json /></marshal>
@@ -32,10 +32,6 @@
     </filter>
 
     <log message="created ${body}" loggingLevel="DEBUG" logName="com.github.jacekszymanski.realcamel" />
-
-    <setHeader name="CamelHttpResponseCode">
-      <constant>201</constant>
-    </setHeader>
 
     <to uri="direct:loginUser" />
   </route>

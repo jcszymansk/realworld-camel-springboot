@@ -1,0 +1,11 @@
+<routeConfigurations>
+  <routeConfiguration id="return-201">
+    <onCompletion mode="BeforeConsumer">
+
+      <setHeader name="CamelHttpResponseCode">
+        <constant>201</constant>
+      </setHeader>
+
+    </onCompletion>
+  </routeConfiguration>
+</routeConfigurations>

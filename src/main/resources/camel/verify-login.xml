@@ -5,6 +5,10 @@
   <route id="direct_verifyLogin" routeConfigurationId="generic-error">
     <from uri="direct:verifyLogin"/>
 
+    <setProperty name="__preserved_body">
+      <simple>${body}</simple>
+    </setProperty>
+
     <script>
       <groovy>resource:classpath:scripts/token.groovy</groovy>
     </script>
@@ -28,5 +32,8 @@
       <simple>${body[0]}</simple>
     </setProperty>
 
+    <setBody>
+      <exchangeProperty>__preserved_body</exchangeProperty>
+    </setBody>
   </route>
 </routes>

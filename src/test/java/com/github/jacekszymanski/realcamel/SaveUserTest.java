@@ -24,7 +24,7 @@ public class SaveUserTest {
 
   public static final String ENTRY_ENDPOINT = "direct:saveUser";
   public static final String JPA_ENDPOINT = "jpa:com.github.jacekszymanski.realcamel.entity.User";
-  
+
   @Autowired
   private CamelContext camelContext;
 
@@ -35,21 +35,13 @@ public class SaveUserTest {
   public void testNewUsernameTaken() throws Exception {
     final CreateUserRequest req = UserUtil.defaultUserRequest();
 
-    final String mockJpaUri = UriUtil.toMockUri(JPA_ENDPOINT);
-
-    final MockEndpoint mockJpaEndpoint = camelContext.getEndpoint(mockJpaUri, MockEndpoint.class);
+    final Exception nonUniqueException =
+        new ConstraintViolationException("unique index violated", new SQLException(), "unique");
 
     AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
         a -> {
-          a.weaveByToUri(JPA_ENDPOINT).replace().to(mockJpaUri);
+          a.weaveByToUri(JPA_ENDPOINT).replace().throwException(nonUniqueException);
         });
-
-    mockJpaEndpoint.whenAnyExchangeReceived(new Processor() {
-      @Override
-      public void process(Exchange exchange) throws Exception {
-        throw new ConstraintViolationException("unique index violated", new SQLException(), "unique");
-      }
-    });
 
     final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT,
         exchange -> exchange.getIn().setBody(req));

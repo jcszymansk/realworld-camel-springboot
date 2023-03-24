@@ -1,6 +1,7 @@
 package com.github.jacekszymanski.realcamel;
 
 import com.github.jacekszymanski.realcamel.model.CreateUserRequest;
+import com.github.jacekszymanski.realcamel.testutil.UriUtil;
 import com.github.jacekszymanski.realcamel.testutil.UserUtil;
 import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
@@ -21,23 +22,26 @@ import java.sql.SQLException;
 @SpringBootTest(classes = CamelApplication.class)
 public class SaveUserTest {
 
+  public static final String ENTRY_ENDPOINT = "direct:saveUser";
+  public static final String JPA_ENDPOINT = "jpa:com.github.jacekszymanski.realcamel.entity.User";
+  
   @Autowired
   private CamelContext camelContext;
 
   @Autowired
   private ProducerTemplate producerTemplate;
 
-  private static final String MOCK_SAVE_ENDPOINT = "mock:save";
-
   @Test
   public void testNewUsernameTaken() throws Exception {
     final CreateUserRequest req = UserUtil.defaultUserRequest();
 
-    final MockEndpoint mockJpaEndpoint = camelContext.getEndpoint(MOCK_SAVE_ENDPOINT, MockEndpoint.class);
+    final String mockJpaUri = UriUtil.toMockUri(JPA_ENDPOINT);
 
-    AdviceWith.adviceWith(camelContext, "direct_saveUser",
+    final MockEndpoint mockJpaEndpoint = camelContext.getEndpoint(mockJpaUri, MockEndpoint.class);
+
+    AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
         a -> {
-          a.weaveByToUri("jpa:com.github.jacekszymanski.realcamel.entity.User").replace().to(MOCK_SAVE_ENDPOINT);
+          a.weaveByToUri(JPA_ENDPOINT).replace().to(mockJpaUri);
         });
 
     mockJpaEndpoint.whenAnyExchangeReceived(new Processor() {
@@ -47,7 +51,7 @@ public class SaveUserTest {
       }
     });
 
-    final Exchange resultExchange = producerTemplate.send("direct:saveUser",
+    final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT,
         exchange -> exchange.getIn().setBody(req));
 
     Assertions.assertEquals(422, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));

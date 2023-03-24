@@ -2,6 +2,7 @@ package com.github.jacekszymanski.realcamel;
 
 import com.github.jacekszymanski.realcamel.entity.User;
 import com.github.jacekszymanski.realcamel.model.CreateUserRequest;
+import com.github.jacekszymanski.realcamel.testutil.UriUtil;
 import com.github.jacekszymanski.realcamel.testutil.UserUtil;
 import org.apache.camel.CamelContext;
 import org.apache.camel.ProducerTemplate;
@@ -16,8 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest(classes = CamelApplication.class)
 public class CreateUserTest {
 
-  private static final String MOCK_SAVE_ENDPOINT = "mock:save";
-  private static final String MOCK_TOKEN_ENDPOINT = "mock:token";
+  public static final String SAVE_ENDPOINT = "direct:saveUser";
+  public static final String LOGIN_ENDPOINT = "direct:loginUser";
+  public static final String ENTRY_ENDPOINT = "direct:createUser";
 
   @Autowired
   private CamelContext camelContext;
@@ -29,13 +31,16 @@ public class CreateUserTest {
   public void testCreateNewUser() throws Exception {
     final CreateUserRequest req = UserUtil.defaultUserRequest();
 
-    final MockEndpoint mockJpaEndpoint = camelContext.getEndpoint(MOCK_SAVE_ENDPOINT, MockEndpoint.class);
-    final MockEndpoint mockTokenEndpoint = camelContext.getEndpoint(MOCK_TOKEN_ENDPOINT, MockEndpoint.class);
+    final String mockSaveEndpoint = UriUtil.toMockUri(SAVE_ENDPOINT);
+    final String mockLoginEndpoint = UriUtil.toMockUri(LOGIN_ENDPOINT);
 
-    AdviceWith.adviceWith(camelContext, "direct_createUser",
+    final MockEndpoint mockJpaEndpoint = camelContext.getEndpoint(mockSaveEndpoint, MockEndpoint.class);
+    final MockEndpoint mockTokenEndpoint = camelContext.getEndpoint(mockLoginEndpoint, MockEndpoint.class);
+
+    AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
         a -> {
-          a.weaveByToUri("direct:saveUser").replace().to(MOCK_SAVE_ENDPOINT);
-          a.weaveByToUri("direct:loginUser").replace().to(MOCK_TOKEN_ENDPOINT);
+          a.weaveByToUri(SAVE_ENDPOINT).replace().to(mockSaveEndpoint);
+          a.weaveByToUri(LOGIN_ENDPOINT).replace().to(mockLoginEndpoint);
         });
 
     final User userEntity = UserUtil.defaultUserEntity();
@@ -43,7 +48,7 @@ public class CreateUserTest {
     mockJpaEndpoint.expectedBodiesReceived(userEntity);
     mockTokenEndpoint.expectedBodiesReceived(userEntity);
 
-    producerTemplate.sendBody("direct:createUser", req);
+    producerTemplate.sendBody(ENTRY_ENDPOINT, req);
 
     mockJpaEndpoint.assertIsSatisfied();
     mockTokenEndpoint.assertIsSatisfied();

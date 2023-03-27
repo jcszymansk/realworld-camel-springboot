@@ -35,5 +35,6 @@
     <setBody>
       <exchangeProperty>__preserved_body</exchangeProperty>
     </setBody>
+    <removeProperty name="__preserved_body" />
   </route>
 </routes>

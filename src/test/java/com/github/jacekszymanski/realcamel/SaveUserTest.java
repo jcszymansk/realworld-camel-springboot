@@ -20,16 +20,10 @@ import java.sql.SQLException;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = CamelApplication.class)
-public class SaveUserTest {
+public class SaveUserTest extends TestsBase {
 
   public static final String ENTRY_ENDPOINT = "direct:saveUser";
   public static final String JPA_ENDPOINT = "jpa:com.github.jacekszymanski.realcamel.entity.User";
-
-  @Autowired
-  private CamelContext camelContext;
-
-  @Autowired
-  private ProducerTemplate producerTemplate;
 
   @Test
   public void testNewUsernameTaken() throws Exception {

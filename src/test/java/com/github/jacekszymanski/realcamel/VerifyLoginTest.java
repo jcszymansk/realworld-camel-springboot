@@ -17,13 +17,7 @@ import java.util.List;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = CamelApplication.class)
-public class VerifyLoginTest {
-
-  @Autowired
-  private CamelContext camelContext;
-
-  @Autowired
-  private ProducerTemplate producerTemplate;
+public class VerifyLoginTest extends TestsBase {
 
   private static final String JPA_ENDPOINT_PATTERN = "jpa:com.github.jacekszymanski.realcamel.entity.User*";
   private static final String ENTRY_ENDPOINT = "direct:verifyLogin";

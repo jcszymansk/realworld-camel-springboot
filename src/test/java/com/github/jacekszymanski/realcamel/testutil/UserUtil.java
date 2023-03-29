@@ -5,9 +5,9 @@ import com.github.jacekszymanski.realcamel.model.CreateUserRequest;
 import com.github.jacekszymanski.realcamel.model.NewUser;
 
 public class UserUtil {
-  private static final String DEFAULT_EMAIL = "abcde@abcde.com";
-  private static final String DEFAULT_PASSWORD = "password";
-  private static final String DEFAULT_USERNAME = "abcde";
+  public static final String DEFAULT_EMAIL = "abcde@abcde.com";
+  public static final String DEFAULT_PASSWORD = "password";
+  public static final String DEFAULT_USERNAME = "abcde";
 
   public static CreateUserRequest defaultUserRequest() {
     final NewUser newUser = new NewUser();

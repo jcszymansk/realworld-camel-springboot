@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
 import java.util.List;
 
 @CamelSpringBootTest
@@ -43,6 +44,22 @@ public class VerifyLoginTest extends TestsBase {
     Assertions.assertEquals(body, resultExchange.getIn().getBody());
     Assertions.assertEquals(user, resultExchange.getProperty("loggedInUser"));
 
+  }
+
+  public void testVerifyLoginNoUser() throws Exception {
+    final Object body = new Object();
+
+    AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
+        a -> {
+          a.weaveByToUri(JPA_ENDPOINT_PATTERN).replace().setBody(e -> Collections.emptyList());
+        });
+
+    final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
+      exchange.getIn().setBody(body);
+      exchange.getIn().setHeader("Authorization", "Token xxx");
+    });
+
+    Assertions.assertEquals(422, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
   }
 
 }

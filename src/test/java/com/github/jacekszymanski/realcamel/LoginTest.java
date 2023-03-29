@@ -8,9 +8,9 @@ import com.github.jacekszymanski.realcamel.testutil.UriUtil;
 import com.github.jacekszymanski.realcamel.testutil.UserUtil;
 import org.apache.camel.Exchange;
 import org.apache.camel.builder.AdviceWith;
+import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
@@ -22,22 +22,64 @@ public class LoginTest extends TestsBase {
   private static final String ENTRY_ENDPOINT = "direct:login";
   private static final String LOGIN_USER_ENDPOINT = "direct:loginUser";
 
+  private static boolean adviced = false;
+
+  private MockEndpoint mockEndpoint;
+
+  @BeforeEach
+  public void setUp() throws Exception {
+    if (!adviced) {
+      AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
+          a -> {
+            a.weaveByToUri(JPA_ENDPOINT_PATTERN).replace().to("mock:returnUser");
+            a.weaveByToUri(LOGIN_USER_ENDPOINT).remove();
+          });
+      adviced = true;
+    }
+
+    mockEndpoint = camelContext.getEndpoint("mock:returnUser", MockEndpoint.class);
+  }
+
+  @AfterEach
+  public void tearDown() throws Exception {
+    mockEndpoint.reset();
+  }
+
   @Test
   public void testLoginOK() throws Exception {
     final LoginRequest loginRequest = loginRequest();
     final User user = UserUtil.defaultUserEntity();
 
-    AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
-        a -> {
-          a.weaveByToUri(JPA_ENDPOINT_PATTERN).replace().setBody(e -> List.of(user));
-          a.weaveByToUri(LOGIN_USER_ENDPOINT).remove();
-        });
+    final MockEndpoint mockEndpoint = camelContext.getEndpoint("mock:returnUser", MockEndpoint.class);
+
+    mockEndpoint.whenAnyExchangeReceived(exchange -> {
+      System.err.println("replacing with");
+      exchange.getMessage().setBody(List.of(user));
+    });
 
     final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
       exchange.getIn().setBody(loginRequest);
     });
 
-    Assertions.assertEquals(user, resultExchange.getIn().getBody());
+    Assertions.assertEquals(user, resultExchange.getMessage().getBody());
+  }
+
+  @Test
+  public void testLoginBadPass() throws Exception {
+    final LoginRequest loginRequest = loginRequest();
+    final User user = UserUtil.defaultUserEntity();
+
+    user.setPassword("1234");
+
+    mockEndpoint.whenAnyExchangeReceived(exchange -> {
+      exchange.getIn().setBody(List.of(user));
+    });
+
+    final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
+      exchange.getIn().setBody(loginRequest);
+    });
+
+    Assertions.assertEquals(401, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
   }
 
   private LoginRequest loginRequest() {

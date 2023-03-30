@@ -1,6 +1,13 @@
 <routeConfigurations>
   <routeConfiguration id="return-201">
     <onCompletion mode="BeforeConsumer">
+      <!--
+        Something else, especially the generic-error handler can already have set the code; onCompleteOnly
+        won't work here as the exception is already handled, and thus the exchange no longer a failure.
+      -->
+      <onWhen>
+        <simple>${header.CamelHttpResponseCode} == null</simple>
+      </onWhen>
 
       <setHeader name="CamelHttpResponseCode">
         <constant>201</constant>

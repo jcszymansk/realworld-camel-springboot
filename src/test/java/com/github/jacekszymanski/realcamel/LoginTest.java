@@ -22,6 +22,10 @@ public class LoginTest extends TestsBase {
   private static final String ENTRY_ENDPOINT = "direct:login";
   private static final String LOGIN_USER_ENDPOINT = "direct:loginUser";
 
+  /***
+   * It's an ugly hack, but I can't advice the route more than once, and all crazy things seem to
+   * happen to the context and mocks when the lifecycle is PER_CLASS and the advice in @BeforeAll.
+   */
   private static boolean adviced = false;
 
   private MockEndpoint mockEndpoint;

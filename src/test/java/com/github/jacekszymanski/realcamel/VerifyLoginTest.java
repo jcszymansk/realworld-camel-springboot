@@ -7,8 +7,10 @@ import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.AdviceWith;
+import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +25,23 @@ public class VerifyLoginTest extends TestsBase {
   private static final String JPA_ENDPOINT_PATTERN = "jpa:com.github.jacekszymanski.realcamel.entity.User*";
   private static final String ENTRY_ENDPOINT = "direct:verifyLogin";
 
+  private static boolean adviced = false;
+
+  private MockEndpoint mockEndpoint;
+
+  @BeforeEach
+  public void setUp() throws Exception {
+    if (!adviced) {
+      AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
+          a -> {
+            a.weaveByToUri(JPA_ENDPOINT_PATTERN).replace().to("mock:returnUser");
+          });
+      adviced = true;
+    }
+
+    mockEndpoint = camelContext.getEndpoint("mock:returnUser", MockEndpoint.class);
+  }
+
 
   @Test
   public void testVerifyLoginOK() throws Exception {
@@ -31,10 +50,9 @@ public class VerifyLoginTest extends TestsBase {
 
     final User user = UserUtil.defaultUserEntity();
 
-    AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
-        a -> {
-          a.weaveByToUri(JPA_ENDPOINT_PATTERN).replace().setBody(e -> List.of(user));
-        });
+    mockEndpoint.whenAnyExchangeReceived(exchange -> {
+      exchange.getMessage().setBody(List.of(user));
+    });
 
     final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
       exchange.getIn().setBody(body);
@@ -46,20 +64,20 @@ public class VerifyLoginTest extends TestsBase {
 
   }
 
+  @Test
   public void testVerifyLoginNoUser() throws Exception {
     final Object body = new Object();
 
-    AdviceWith.adviceWith(camelContext, UriUtil.fromEndpointToRouteId(ENTRY_ENDPOINT),
-        a -> {
-          a.weaveByToUri(JPA_ENDPOINT_PATTERN).replace().setBody(e -> Collections.emptyList());
-        });
+    mockEndpoint.whenAnyExchangeReceived(exchange -> {
+      exchange.getMessage().setBody(Collections.emptyList());
+    });
 
     final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
       exchange.getIn().setBody(body);
       exchange.getIn().setHeader("Authorization", "Token xxx");
     });
 
-    Assertions.assertEquals(422, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
+    Assertions.assertEquals(401, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
   }
 
 }

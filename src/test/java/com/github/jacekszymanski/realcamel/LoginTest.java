@@ -13,6 +13,7 @@ import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
 import java.util.List;
 
 @CamelSpringBootTest
@@ -85,6 +86,22 @@ public class LoginTest extends TestsBase {
 
     Assertions.assertEquals(401, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
   }
+
+  @Test
+  public void testLoginNoUser() throws Exception {
+    final LoginRequest loginRequest = loginRequest();
+
+    mockEndpoint.whenAnyExchangeReceived(exchange -> {
+      exchange.getIn().setBody(Collections.emptyList());
+    });
+
+    final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
+      exchange.getIn().setBody(loginRequest);
+    });
+
+    Assertions.assertEquals(401, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
+  }
+
 
   private LoginRequest loginRequest() {
     final LoginUser loginUser = new LoginUser();

@@ -31,7 +31,6 @@ public class User extends Base {
   private String bio;
 
   @Column
-  @Lob
-  private byte[] image;
+  private String image;
 
 }

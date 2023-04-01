@@ -5,6 +5,13 @@
   <route id="direct_verifyLogin" routeConfigurationId="generic-error">
     <from uri="direct:verifyLogin"/>
 
+    <filter>
+      <simple>${header.Authorization} == null</simple>
+
+      <throwException message="No Authorization header"
+                      exceptionType="com.github.jacekszymanski.realcamel.UnauthorizedException" />
+    </filter>
+
     <setProperty name="__preserved_body">
       <simple>${body}</simple>
     </setProperty>

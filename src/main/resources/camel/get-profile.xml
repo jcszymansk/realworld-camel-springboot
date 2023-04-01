@@ -1,0 +1,55 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+  <route id="direct_getProfileByUsername" routeConfigurationId="generic-error">
+    <from uri="direct:getProfileByUsername"/>
+
+    <filter>
+      <!-- This is accessible without logging in, but if a user is logged in,
+           verify and fetch their profile
+      -->
+      <header>Authorization</header>
+
+      <to uri="direct:verifyLogin" />
+    </filter>
+
+    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${header.username}" />
+
+    <filter>
+      <simple><![CDATA[
+        ${body.size} != 1
+      ]]></simple>
+
+      <throwException message="No such user" exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
+    </filter>
+
+    <setBody>
+      <simple>${body[0]}</simple>
+    </setBody>
+
+    <choice>
+      <when>
+        <exchangeProperty>loggedInUser</exchangeProperty>
+
+        <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
+      </when>
+      <otherwise>
+        <setHeader name="__me_follower">
+          <constant>0</constant>
+        </setHeader>
+      </otherwise>
+    </choice>
+
+    <marshal><json /></marshal>
+    <to uri="jsonata:jsonata/get-profile-resp.jsonata?inputType=JsonString" />
+
+    <unmarshal>
+      <json unmarshalType="com.github.jacekszymanski.realcamel.model.GetProfileByUsername200Response"
+            disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES" />
+    </unmarshal>
+
+    <script>
+      <groovy>request.body.profile.following = (request.headers.'__me_follower' == 1 ? true : false)</groovy>
+    </script>
+
+    <removeHeaders pattern="__*" />
+  </route>
+</routes>

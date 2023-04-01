@@ -26,10 +26,12 @@ public class Follow implements Serializable {
 
   @Id
   @ManyToOne(fetch=FetchType.LAZY, optional = false)
+  @JoinColumn(name = "followed")
   private User followed;
 
   @Id
   @ManyToOne(fetch=FetchType.LAZY, optional = false)
+  @JoinColumn(name = "follower")
   private User follower;
 
 }

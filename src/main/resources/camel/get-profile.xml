@@ -1,15 +1,6 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_getProfileByUsername" routeConfigurationId="generic-error">
+  <route id="direct_getProfileByUsername" routeConfigurationId="maybe-verify-login,generic-error">
     <from uri="direct:getProfileByUsername"/>
-
-    <filter>
-      <!-- This is accessible without logging in, but if a user is logged in,
-           verify and fetch their profile
-      -->
-      <header>Authorization</header>
-
-      <to uri="direct:verifyLogin" />
-    </filter>
 
     <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${header.username}" />
 

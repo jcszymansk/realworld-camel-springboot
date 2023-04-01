@@ -1,0 +1,19 @@
+<routeConfigurations>
+
+  <routeConfiguration id="verify-login">
+    <interceptFrom uri="*">
+      <to uri="direct:verifyLogin"/>
+    </interceptFrom>
+  </routeConfiguration>
+
+  <routeConfiguration id="maybe-verify-login">
+    <interceptFrom uri="*">
+      <filter>
+        <header>Authorization</header>
+
+        <to uri="direct:verifyLogin"/>
+      </filter>
+    </interceptFrom>
+  </routeConfiguration>
+
+</routeConfigurations>

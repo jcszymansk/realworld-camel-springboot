@@ -1,13 +1,11 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_updateCurrentUser" routeConfigurationId="generic-error">
+  <route id="direct_updateCurrentUser" routeConfigurationId="verify-login,generic-error">
     <from uri="direct:updateCurrentUser"/>
 
     <marshal><json library="Jackson" /></marshal>
     <unmarshal><json library="Jackson" unmarshalType="java.util.Map" /></unmarshal>
 
     <log message="auth ${header.Authorization}" loggingLevel="DEBUG"/>
-
-    <to uri="direct:verifyLogin" />
 
     <log message="body ${body}" loggingLevel="DEBUG"/>
 

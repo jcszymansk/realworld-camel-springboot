@@ -1,10 +1,8 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_getCurrentUser" routeConfigurationId="generic-error">
+  <route id="direct_getCurrentUser" routeConfigurationId="verify-login,generic-error">
     <from uri="direct:getCurrentUser" />
 
     <log message="auth ${header.Authorization}" loggingLevel="DEBUG"/>
-
-    <to uri="direct:verifyLogin" />
 
     <setBody>
       <simple>${exchangeProperty.loggedInUser}</simple>

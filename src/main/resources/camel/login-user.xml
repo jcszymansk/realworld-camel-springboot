@@ -6,7 +6,7 @@
     <marshal><json /></marshal>
     <to uri="jsonata:jsonata/create-user-resp.jsonata?inputType=JsonString" />
 
-    <log message="transformed ${body}" loggingLevel="DEBUG" logName="com.github.jacekszymanski.realcamel" />
+    <log message="transformed ${body}" loggingLevel="DEBUG" />
 
     <unmarshal>
       <json unmarshalType="com.github.jacekszymanski.realcamel.model.Login200Response"

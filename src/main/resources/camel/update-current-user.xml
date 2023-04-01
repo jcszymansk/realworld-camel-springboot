@@ -5,11 +5,11 @@
     <marshal><json library="Jackson" /></marshal>
     <unmarshal><json library="Jackson" unmarshalType="java.util.Map" /></unmarshal>
 
-    <log message="auth ${header.Authorization}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG"/>
+    <log message="auth ${header.Authorization}" loggingLevel="DEBUG"/>
 
     <to uri="direct:verifyLogin" />
 
-    <log message="body ${body}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG"/>
+    <log message="body ${body}" loggingLevel="DEBUG"/>
 
     <script>
       <groovy>resource:classpath:scripts/update-user.groovy</groovy>

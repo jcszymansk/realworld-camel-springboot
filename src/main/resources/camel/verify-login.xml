@@ -13,7 +13,7 @@
       <groovy>resource:classpath:scripts/token.groovy</groovy>
     </script>
 
-    <log logName="com.github.jacekszymanski.realcamel" message="got token ${exchangeProperty.jwt_token}"
+    <log message="got token ${exchangeProperty.jwt_token}"
          loggingLevel="DEBUG"/>
 
     <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${exchangeProperty.jwt_token['username']}" />

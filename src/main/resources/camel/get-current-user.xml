@@ -2,7 +2,7 @@
   <route id="direct_getCurrentUser" routeConfigurationId="generic-error">
     <from uri="direct:getCurrentUser" />
 
-    <log message="auth ${header.Authorization}" logName="com.github.jacekszymanski.realcamel" loggingLevel="DEBUG"/>
+    <log message="auth ${header.Authorization}" loggingLevel="DEBUG"/>
 
     <to uri="direct:verifyLogin" />
 

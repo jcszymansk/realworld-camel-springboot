@@ -80,4 +80,15 @@ public class VerifyLoginTest extends TestsBase {
     Assertions.assertEquals(401, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
   }
 
+  @Test
+  public void testVerifyLoginNoAuthHeader() throws Exception {
+    final Object body = new Object();
+
+    final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
+      exchange.getIn().setBody(body);
+    });
+
+    Assertions.assertEquals(401, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));
+  }
+
 }

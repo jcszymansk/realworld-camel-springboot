@@ -192,6 +192,7 @@
               <generatorName>java-camel</generatorName>
               <configOptions>
                 <sourceFolder>src/gen/java</sourceFolder>
+                <camelRestClientRequestValidation>true</camelRestClientRequestValidation>
               </configOptions>
             </configuration>
           </execution>

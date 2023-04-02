@@ -1,0 +1,8 @@
+<routeConfigurations>
+  <routeConfiguration id="ignore-duplicate-error">
+    <onException>
+      <exception>org.springframework.dao.DuplicateKeyException</exception>
+      <continued><constant>true</constant></continued>
+    </onException>
+  </routeConfiguration>
+</routeConfigurations>

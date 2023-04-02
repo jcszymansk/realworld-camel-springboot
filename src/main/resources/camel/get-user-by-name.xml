@@ -1,0 +1,8 @@
+<routes>
+  <route id="direct_getUserByName" routeConfigurationId="no-such-user-error,generic-error">
+    <from uri="direct:getUserByName"/>
+
+    <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${header.username}&amp;outputType=SelectOne" />
+
+  </route>
+</routes>

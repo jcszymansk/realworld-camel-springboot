@@ -1,0 +1,20 @@
+<routes>
+  <route id="direct_returnUserProfile">
+    <from uri="direct:returnUserProfile"/>
+
+    <marshal><json /></marshal>
+    <to uri="jsonata:jsonata/get-profile-resp.jsonata?inputType=JsonString" />
+
+    <unmarshal>
+      <json unmarshalType="com.github.jacekszymanski.realcamel.model.GetProfileByUsername200Response"
+            disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES" />
+    </unmarshal>
+
+    <script>
+      <groovy>request.body.profile.following = (request.headers.'__me_follower' == 1 ? true : false)</groovy>
+    </script>
+
+    <removeHeaders pattern="__*" />
+    <stop />
+  </route>
+</routes>

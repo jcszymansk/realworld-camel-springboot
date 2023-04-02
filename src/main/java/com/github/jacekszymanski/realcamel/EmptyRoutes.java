@@ -25,7 +25,7 @@ public class EmptyRoutes extends RouteBuilder {
       "direct:deleteArticleFavorite",
       //"direct:followUserByUsername",
       //"direct:getProfileByUsername",
-      "direct:unfollowUserByUsername",
+      //"direct:unfollowUserByUsername",
       "direct:getTags"
       //"direct:createUser",
       //"direct:getCurrentUser",

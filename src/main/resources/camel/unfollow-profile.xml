@@ -1,0 +1,23 @@
+<routes>
+  <route id="direct_unfollowUserByUsername" routeConfigurationId="verify-login,generic-error">
+    <from uri="direct:unfollowUserByUsername"/>
+
+    <to uri="direct:getUserByName" />
+
+    <filter>
+      <simple>${body.id} == ${exchangeProperty.loggedInUser.id}</simple>
+
+      <throwException message="You cannot unfollow yourself"
+                      exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
+    </filter>
+
+    <to uri="sql:classpath:sql/unfollow.sql" />
+
+    <setHeader name="__me_follower">
+      <constant resultType="java.lang.Integer">0</constant>
+    </setHeader>
+
+    <to uri="direct:returnUserProfile" />
+
+  </route>
+</routes>

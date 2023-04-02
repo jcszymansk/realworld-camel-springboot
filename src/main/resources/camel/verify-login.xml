@@ -12,10 +12,6 @@
                       exceptionType="com.github.jacekszymanski.realcamel.UnauthorizedException" />
     </filter>
 
-    <setProperty name="__preserved_body">
-      <simple>${body}</simple>
-    </setProperty>
-
     <script>
       <groovy>resource:classpath:scripts/token.groovy</groovy>
     </script>
@@ -23,25 +19,7 @@
     <log message="got token ${exchangeProperty.jwt_token}"
          loggingLevel="DEBUG"/>
 
-    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${exchangeProperty.jwt_token['username']}" />
+    <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${exchangeProperty.jwt_token['username']}&amp;outputType=SelectOne&amp;outputTarget=%loggedInUser" />
 
-    <!-- the account may have been deleted before the token expired (once I have real tokens...) -->
-    <filter>
-      <simple><![CDATA[
-        ${body.size} != 1
-      ]]></simple>
-
-      <throwException message="No such user" exceptionType="com.github.jacekszymanski.realcamel.UnauthorizedException" />
-
-    </filter>
-
-    <setProperty name="loggedInUser">
-      <simple>${body[0]}</simple>
-    </setProperty>
-
-    <setBody>
-      <exchangeProperty>__preserved_body</exchangeProperty>
-    </setBody>
-    <removeProperty name="__preserved_body" />
   </route>
 </routes>

@@ -1,6 +1,5 @@
 package com.github.jacekszymanski.realcamel.entity;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,7 +14,6 @@ import javax.persistence.*;
 })
 @Getter
 @Setter
-@EqualsAndHashCode
 @ToString(exclude = "image")
 public class User extends Base {
   @Column(nullable = false, unique = true)

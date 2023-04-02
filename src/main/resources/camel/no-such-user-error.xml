@@ -1,5 +1,5 @@
 <routeConfigurations>
-  <routeConfiguration id="get-profile-no-user-error">
+  <routeConfiguration id="no-such-user-error">
     <onException>
       <exception>javax.persistence.NonUniqueResultException</exception>
       <handled><constant>true</constant></handled>

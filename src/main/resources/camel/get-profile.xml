@@ -1,23 +1,11 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_getProfileByUsername" routeConfigurationId="maybe-verify-login,generic-error,get-profile-no-user-error">
+  <route id="direct_getProfileByUsername" routeConfigurationId="maybe-verify-login,generic-error">
     <from uri="direct:getProfileByUsername"/>
 
-    <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${header.username}&amp;outputType=SelectOne" />
+    <to uri="direct:getUserByName" />
 
     <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
 
-    <marshal><json /></marshal>
-    <to uri="jsonata:jsonata/get-profile-resp.jsonata?inputType=JsonString" />
-
-    <unmarshal>
-      <json unmarshalType="com.github.jacekszymanski.realcamel.model.GetProfileByUsername200Response"
-            disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES" />
-    </unmarshal>
-
-    <script>
-      <groovy>request.body.profile.following = (request.headers.'__me_follower' == 1 ? true : false)</groovy>
-    </script>
-
-    <removeHeaders pattern="__*" />
+    <to uri="direct:returnUserProfile" />
   </route>
 </routes>

@@ -16,18 +16,7 @@
       <simple>${body[0]}</simple>
     </setBody>
 
-    <choice>
-      <when>
-        <exchangeProperty>loggedInUser</exchangeProperty>
-
-        <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
-      </when>
-      <otherwise>
-        <setHeader name="__me_follower">
-          <constant>0</constant>
-        </setHeader>
-      </otherwise>
-    </choice>
+    <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
 
     <marshal><json /></marshal>
     <to uri="jsonata:jsonata/get-profile-resp.jsonata?inputType=JsonString" />

@@ -1,20 +1,8 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_getProfileByUsername" routeConfigurationId="maybe-verify-login,generic-error">
+  <route id="direct_getProfileByUsername" routeConfigurationId="maybe-verify-login,generic-error,get-profile-no-user-error">
     <from uri="direct:getProfileByUsername"/>
 
-    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${header.username}" />
-
-    <filter>
-      <simple><![CDATA[
-        ${body.size} != 1
-      ]]></simple>
-
-      <throwException message="No such user" exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
-    </filter>
-
-    <setBody>
-      <simple>${body[0]}</simple>
-    </setBody>
+    <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${header.username}&amp;outputType=SelectOne" />
 
     <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
 

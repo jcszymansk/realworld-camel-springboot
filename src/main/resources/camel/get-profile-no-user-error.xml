@@ -1,0 +1,17 @@
+<routeConfigurations>
+  <routeConfiguration id="get-profile-no-user-error">
+    <onException>
+      <exception>javax.persistence.NonUniqueResultException</exception>
+      <handled><constant>true</constant></handled>
+
+      <setProperty name="ownErrorMessage">
+        <constant>No such user</constant>
+      </setProperty>
+      <setHeader name="CamelHttpResponseCode">
+        <constant>422</constant>
+      </setHeader>
+
+      <to uri="direct:returnError" />
+    </onException>
+  </routeConfiguration>
+</routeConfigurations>

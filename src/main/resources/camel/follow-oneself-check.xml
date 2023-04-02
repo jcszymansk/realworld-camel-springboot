@@ -1,0 +1,10 @@
+<route id="direct_followOneselfCheck" routeConfigurationId="generic-error" xmlns="http://camel.apache.org/schema/spring">
+  <from uri="direct:followOneselfCheck"/>
+
+  <filter>
+    <simple>${body.id} == ${exchangeProperty.loggedInUser.id}</simple>
+    <throwException message="You cannot (un)follow yourself"
+                    exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
+  </filter>
+
+</route>

@@ -4,12 +4,7 @@
 
     <to uri="direct:getUserByName" />
 
-    <filter>
-      <simple>${body.id} == ${exchangeProperty.loggedInUser.id}</simple>
-
-      <throwException message="You cannot follow yourself"
-                      exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
-    </filter>
+    <to uri="direct:followOneselfCheck" />
 
     <to uri="sql:classpath:sql/follow.sql" />
 

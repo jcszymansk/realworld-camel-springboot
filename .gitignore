@@ -135,3 +135,7 @@ Temporary Items
 .idea/
 target/
 .vscode/
+.settings/
+.classpath
+.factorypath
+.project

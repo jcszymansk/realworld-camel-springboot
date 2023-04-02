@@ -2,7 +2,7 @@
   <!-- now there's no JWT support in Camel; I plan to code it, but for now
        a poor fake is enough to fool postman tests.
   -->
-  <route id="direct_verifyLogin" routeConfigurationId="generic-error">
+  <route id="direct_verifyLogin" routeConfigurationId="generic-error,verify-login-error-no-user">
     <from uri="direct:verifyLogin"/>
 
     <filter>

@@ -1,0 +1,17 @@
+<routeConfigurations>
+  <routeConfiguration id="verify-login-error-no-user">
+    <onException>
+      <exception>javax.persistence.NonUniqueResultException</exception>
+      <handled><constant>true</constant></handled>
+
+      <setProperty name="ownErrorMessage">
+        <constant>wrong authentication data</constant>
+      </setProperty>
+      <setHeader name="CamelHttpResponseCode">
+        <constant>401</constant>
+      </setHeader>
+
+      <to uri="direct:returnError" />
+    </onException>
+  </routeConfiguration>
+</routeConfigurations>

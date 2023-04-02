@@ -17,7 +17,14 @@
         <![CDATA[
             import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.*
 
-            request.body.errors.body.addAll(messages(exception(exchange)))
+            String msg = exchange.properties.'ownErrorMessage'
+            def errList = request.body.errors.body
+
+            if (msg != null) {
+              errList.add(msg)
+            }
+
+            errList.addAll(messages(exception(exchange)))
           ]]>
       </groovy>
     </script>

@@ -6,7 +6,7 @@
   </setProperty>
 
   <marshal><json /></marshal>
-  <to uri="jstl:classpath:jstl/create-article-req2db.jstl" />
+  <to uri="jslt:classpath:jslt/create-article-req2db.jslt" />
 
   <unmarshal><json library="Jackson" unmarshalType="com.github.jacekszymanski.realcamel.entity.Article" /></unmarshal>
 

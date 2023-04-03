@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.persistence.NonUniqueResultException;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @SpringBootTest(classes = CamelApplication.class)
 public class VerifyLoginTest extends TestsBase {
 
-  private static final String JPA_ENDPOINT_PATTERN = "jpa:com.github.jacekszymanski.realcamel.entity.User*";
+  private static final String JPA_ENDPOINT_PATTERN = "xjpa:com.github.jacekszymanski.realcamel.entity.User*";
   private static final String ENTRY_ENDPOINT = "direct:verifyLogin";
 
   private static boolean adviced = false;
@@ -51,7 +52,7 @@ public class VerifyLoginTest extends TestsBase {
     final User user = UserUtil.defaultUserEntity();
 
     mockEndpoint.whenAnyExchangeReceived(exchange -> {
-      exchange.getMessage().setBody(List.of(user));
+      exchange.setProperty("loggedInUser", user);
     });
 
     final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
@@ -69,7 +70,7 @@ public class VerifyLoginTest extends TestsBase {
     final Object body = new Object();
 
     mockEndpoint.whenAnyExchangeReceived(exchange -> {
-      exchange.getMessage().setBody(Collections.emptyList());
+      throw new NonUniqueResultException();
     });
 
     final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {

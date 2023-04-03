@@ -8,7 +8,7 @@
         <constant>wrong authentication data</constant>
       </setProperty>
       <setHeader name="CamelHttpResponseCode">
-        <constant>401</constant>
+        <constant resultType="java.lang.Integer">401</constant>
       </setHeader>
 
       <to uri="direct:returnError" />

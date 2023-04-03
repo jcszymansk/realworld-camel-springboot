@@ -10,7 +10,7 @@
       </onWhen>
 
       <setHeader name="CamelHttpResponseCode">
-        <constant>201</constant>
+        <constant resultType="java.lang.Integer">201</constant>
       </setHeader>
 
     </onCompletion>

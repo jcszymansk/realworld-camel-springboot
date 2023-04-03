@@ -1,4 +1,4 @@
-<route id="direct_createArticle" routeConfigurationId="verify-login,generic-error,return-201">
+<route id="direct_createArticle" routeConfigurationId="verify-login,generic-error,return-201" xmlns="http://camel.apache.org/schema/spring">
   <from uri="direct:createArticle"/>
 
   <marshal><json /></marshal>

@@ -1,4 +1,4 @@
-<routes>
+<routes xmlns="http://camel.apache.org/schema/spring">
   <route id="direct_getUserByName" routeConfigurationId="no-such-user-error,generic-error">
     <from uri="direct:getUserByName"/>
 

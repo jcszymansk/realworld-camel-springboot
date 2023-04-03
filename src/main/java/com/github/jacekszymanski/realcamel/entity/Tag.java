@@ -12,16 +12,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "tags")
 @Getter
 @Setter
 @ToString(exclude = { "article" })
+@EqualsAndHashCode(exclude = { "article" })
 @AllArgsConstructor
 public class Tag implements Serializable {
 

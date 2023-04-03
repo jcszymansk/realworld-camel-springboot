@@ -14,6 +14,7 @@ import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -23,6 +24,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true, exclude = { "body", "description" })
+@EqualsAndHashCode
 public class Article extends Base {
 
   @Column(nullable = false)

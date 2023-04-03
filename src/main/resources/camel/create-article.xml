@@ -15,6 +15,7 @@
 
   <script>
     <groovy>
+      request.body.'author' = exchange.properties.'loggedInUser'
       exchange.properties.'__tags'.each { request.body.addTag(it) }
     </groovy>
   </script>

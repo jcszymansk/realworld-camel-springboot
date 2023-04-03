@@ -1,7 +1,7 @@
 <route id="direct_createArticle">
   <from uri="direct:createArticle"/>
 
-  <setProperty propertyName="__tags">
+  <setProperty name="__tags">
     <simple>${body.tagList}</simple>
   </setProperty>
 

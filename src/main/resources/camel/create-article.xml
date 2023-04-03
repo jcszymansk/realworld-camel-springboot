@@ -1,4 +1,4 @@
-<route id="direct_createArticle" routeConfigurationId="verify-login,generic-error">
+<route id="direct_createArticle" routeConfigurationId="verify-login,generic-error,return-201">
   <from uri="direct:createArticle"/>
 
   <marshal><json /></marshal>
@@ -23,6 +23,6 @@
   <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Article" />
 
   <marshal><json /></marshal>
-
+  <to uri="jslt:classpath:jslt/create-article-resp.jslt" />
 
 </route>

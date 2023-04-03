@@ -21,7 +21,7 @@ import lombok.ToString;
 @Table(name = "tags")
 @Getter
 @Setter
-@ToString
+@ToString(exclude = { "article" })
 @AllArgsConstructor
 public class Tag implements Serializable {
 

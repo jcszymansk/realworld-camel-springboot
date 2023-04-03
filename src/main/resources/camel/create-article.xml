@@ -1,8 +1,11 @@
-<route id="direct_createArticle">
+<route id="direct_createArticle" routeConfigurationId="verify-login,generic-error">
   <from uri="direct:createArticle"/>
 
+  <marshal><json /></marshal>
+  <unmarshal><json unmarshalType="java.util.Map" /></unmarshal>
+
   <setProperty name="__tags">
-    <simple>${body.tagList}</simple>
+    <simple>${body['article']['tagList']}</simple>
   </setProperty>
 
   <marshal><json /></marshal>

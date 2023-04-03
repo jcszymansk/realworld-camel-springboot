@@ -1,5 +1,6 @@
 package com.github.jacekszymanski.realcamel.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class Article extends Base {
   private Date updatedAt;
 
   @OneToMany(mappedBy = "article", fetch = FetchType.EAGER)
-  private List<Tag> tagList = List.of();
+  private List<Tag> tagList = new ArrayList<>();
 
   @PrePersist
   @PreUpdate

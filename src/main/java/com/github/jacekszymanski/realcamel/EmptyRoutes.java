@@ -12,7 +12,7 @@ import java.util.List;
 public class EmptyRoutes extends RouteBuilder {
 
   private static final List<String> STARTER_URIS = List.of(
-      "direct:createArticle",
+      //"direct:createArticle",
       "direct:deleteArticle",
       "direct:getArticle",
       "direct:getArticles",

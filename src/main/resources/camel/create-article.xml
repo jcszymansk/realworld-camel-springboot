@@ -1,0 +1,24 @@
+<route id="direct_createArticle">
+  <from uri="direct:createArticle"/>
+
+  <setProperty propertyName="__tags">
+    <simple>${body.tagList}</simple>
+  </setProperty>
+
+  <marshal><json /></marshal>
+  <to uri="jstl:classpath:jstl/create-article-req2db.jstl" />
+
+  <unmarshal><json library="Jackson" unmarshalType="com.github.jacekszymanski.realcamel.entity.Article" /></unmarshal>
+
+  <script>
+    <groovy>
+      exchange.properties.'__tags'.each { request.body.addTag(it) }
+    </groovy>
+  </script>
+
+  <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Article" />
+
+  <marshal><json /></marshal>
+
+
+</route>

@@ -8,7 +8,7 @@
         <constant>user or email already taken</constant>
       </setProperty>
       <setHeader name="CamelHttpResponseCode">
-        <constant>401</constant>
+        <constant resultType="java.lang.Integer">422</constant>
       </setHeader>
 
       <to uri="direct:returnError" />

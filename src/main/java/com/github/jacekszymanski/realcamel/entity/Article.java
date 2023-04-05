@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -46,7 +47,7 @@ public class Article extends Base {
   @Column(nullable = false)
   private Date updatedAt;
 
-  @OneToMany(mappedBy = "article", fetch = FetchType.EAGER)
+  @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
   private List<Tag> tagList = new ArrayList<>();
 
   @PrePersist

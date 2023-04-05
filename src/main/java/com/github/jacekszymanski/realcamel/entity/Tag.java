@@ -21,6 +21,7 @@ import lombok.*;
 @ToString(exclude = { "article" })
 @EqualsAndHashCode(exclude = { "article" })
 @AllArgsConstructor
+@NoArgsConstructor
 public class Tag implements Serializable {
 
   @Id

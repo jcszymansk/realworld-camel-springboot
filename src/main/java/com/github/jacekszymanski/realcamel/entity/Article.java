@@ -24,7 +24,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true, exclude = { "body", "description" })
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class Article extends Base {
 
   @Column(nullable = false)

@@ -16,7 +16,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @ToString(exclude = "image")
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = true)
 public class User extends Base {
   @Column(nullable = false, unique = true)
   private String username;

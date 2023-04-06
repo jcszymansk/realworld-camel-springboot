@@ -20,9 +20,17 @@
     </groovy>
   </script>
 
-  <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Article" />
+  <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?usePersist=true" />
 
   <marshal><json /></marshal>
   <to uri="jslt:classpath:jslt/create-article-resp.jslt" />
+
+  <log message="Article created: ${body}" />
+
+  <unmarshal><json
+    library="Jackson"
+    unmarshalType="com.github.jacekszymanski.realcamel.model.CreateArticle201Response"
+    disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"
+  /></unmarshal>
 
 </route>

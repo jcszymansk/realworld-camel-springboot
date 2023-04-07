@@ -201,6 +201,7 @@
               <configOptions>
                 <sourceFolder>src/gen/java</sourceFolder>
                 <camelRestClientRequestValidation>true</camelRestClientRequestValidation>
+                <camelDataformatProperties>json.out.disableFeatures=WRITE_DATES_AS_TIMESTAMPS</camelDataformatProperties>
               </configOptions>
             </configuration>
           </execution>

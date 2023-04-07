@@ -2,14 +2,9 @@
   routeConfigurationId="maybe-verify-login,generic-error,no-such-object-error"
   xmlns="http://camel.apache.org/schema/spring">
 
-  <from uri="direct:getArticle"/>
+  <from uri="direct:getArticle" />
 
-  <setBody>
-    <!-- TODO check for invalid slug -->
-    <groovy resultType="java.lang.Long">request.headers.'slug'.replaceFirst('^.*?(\\d+)$', '$1')</groovy>
-  </setBody>
-
-  <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?findEntity=true&amp;outputType=SelectOne" />
+  <to uri="direct:findArticle" />
 
 
 </route>

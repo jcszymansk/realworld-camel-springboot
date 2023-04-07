@@ -2,12 +2,7 @@
 
   <from uri="direct:deleteArticle"/>
 
-  <setBody>
-    <!-- TODO check for invalid slug -->
-    <groovy resultType="java.lang.Long">request.headers.'slug'.replaceFirst('^.*?(\\d+)$', '$1')</groovy>
-  </setBody>
-
-  <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?findEntity=true&amp;outputType=SelectOne" />
+  <to uri="direct:findArticle" />
 
   <filter>
     <simple>${body.author.id} != ${exchangeProperty.loggedInUser.id}</simple>

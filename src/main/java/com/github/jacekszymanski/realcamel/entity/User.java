@@ -7,6 +7,8 @@ import lombok.ToString;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "users")
 @NamedQueries({
@@ -17,6 +19,7 @@ import javax.persistence.*;
 @Setter
 @ToString(exclude = "image")
 @EqualsAndHashCode(callSuper = true)
+@JsonIgnoreProperties(value = { "id" })
 public class User extends Base {
   @Column(nullable = false, unique = true)
   private String username;

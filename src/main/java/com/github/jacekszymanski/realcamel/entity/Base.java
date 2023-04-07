@@ -1,6 +1,5 @@
 package com.github.jacekszymanski.realcamel.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +14,6 @@ public class Base {
 
   @Id
   @GeneratedValue
-  @JsonIgnore
   private Long id;
 
 }

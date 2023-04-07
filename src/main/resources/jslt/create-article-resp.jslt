@@ -5,7 +5,7 @@
     "favoritesCount": $headers.__favorites.FAVORITES,
     "favorited": ($headers.__favorites.MYFAVORITE == 1),
     "author": .author | {
-      "following": false,
+      "following": ($headers.__me_follower == 1),
       * : .
     },
     * : .

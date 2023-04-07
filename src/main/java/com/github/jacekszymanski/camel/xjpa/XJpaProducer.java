@@ -45,6 +45,10 @@ public class XJpaProducer extends JpaProducer {
     if (maxResults > 0) {
       query.setMaxResults(maxResults);
     }
+    final int firstResult = ((XJpaEndpoint) getEndpoint()).getFirstResult();
+    if (firstResult > 0) {
+      query.setFirstResult(firstResult);
+    }
     // setup the parameters
     Map<String, ?> params;
     final java.util.Map<String, Object> parameters = getParameters();

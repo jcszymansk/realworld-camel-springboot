@@ -35,6 +35,13 @@ public class XJpaEndpoint extends JpaEndpoint {
   )
   private XJpaOutputType outputType;
 
+  @Getter @Setter
+  @UriParam(name="firstResult",
+      label = "producer",
+      description = "The index of the first result to return."
+  )
+  private int firstResult;
+
   public XJpaEndpoint(final String uri, final XJpaComponent component) {
     super(uri, component);
   }

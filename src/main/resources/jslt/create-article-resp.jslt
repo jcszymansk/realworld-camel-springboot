@@ -1,1 +1,7 @@
-{ "article" : . | { "tagList" : [for (.tagList) .tag], * : . } }
+{
+  "article" : . | {
+    "tagList" : [for (.tagList) .tag],
+    "slug": string(.id),
+    * : .
+  }
+}

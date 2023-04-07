@@ -1,5 +1,5 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_getUserByName" routeConfigurationId="no-such-user-error,generic-error">
+  <route id="direct_getUserByName" routeConfigurationId="no-such-object-error,generic-error">
     <from uri="direct:getUserByName"/>
 
     <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${header.username}&amp;outputType=SelectOne" />

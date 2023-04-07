@@ -1,0 +1,21 @@
+<routeConfigurations>
+  <routeConfiguration id="no-such-object-error">
+    <onException>
+      <exception>javax.persistence.NonUniqueResultException</exception>
+      <handled><constant>true</constant></handled>
+
+      <setProperty name="ownErrorMessage">
+        <groovy>
+          'No such ' +
+                exchange.unitOfWork?.route?.routeId?.replaceFirst('^.*?([A-Z][a-z]+)$', '$1').toLowerCase() ?:
+               'object'
+        </groovy>
+      </setProperty>
+      <setHeader name="CamelHttpResponseCode">
+        <constant>422</constant>
+      </setHeader>
+
+      <to uri="direct:returnError" />
+    </onException>
+  </routeConfiguration>
+</routeConfigurations>

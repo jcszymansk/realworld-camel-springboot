@@ -39,7 +39,7 @@ public class XJpaProducer extends JpaProducer {
   }
 
   // This is unfortunately private in the superclass.
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "deprecation"})
   private void configureParameters(Query query, Exchange exchange) {
     int maxResults = getEndpoint().getMaximumResults();
     if (maxResults > 0) {

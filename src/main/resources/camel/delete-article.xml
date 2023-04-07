@@ -1,0 +1,23 @@
+<route id="direct_deleteArticle" routeConfigurationId="verify-login,generic-error,no-such-article-error" xmlns="http://camel.apache.org/schema/spring">
+
+  <from uri="direct:deleteArticle"/>
+
+  <setBody>
+    <!-- TODO check for invalid slug -->
+    <groovy resultType="java.lang.Long">request.headers.'slug'.replaceFirst('^.*?(\\d+)$', '$1')</groovy>
+  </setBody>
+
+  <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?findEntity=true&amp;outputType=SelectOne" />
+
+  <filter>
+    <simple>${body.author.id} != ${exchangeProperty.loggedInUser.id}</simple>
+
+    <throwException message="You are not the author of this article"
+                    exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
+  </filter>
+
+  <log message="Deleting article: ${body.id} ${body.title}" />
+
+  <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?remove=true" />
+
+</route>

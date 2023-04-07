@@ -6,6 +6,8 @@
 : ${IMAGE:=https://static.productionready.io/images/smiley-cyrus.jpg}
 : ${BIO:=I work at statefarm}
 
+: ${APIURL:=http://localhost:8080/api}
+
 UJSON='{"user":{"username":"'${USERNAME}'","email":"'${EMAIL}'","password":"'${PASSWORD}'"}}'
 
 echo "UJSON: ${UJSON}"
@@ -13,4 +15,4 @@ echo "UJSON: ${UJSON}"
 curl -i -X POST \
   -H "Content-Type: application/json" \
   -d "${UJSON}" \
-  http://localhost:8080/api/users
+  ${APIURL}/users

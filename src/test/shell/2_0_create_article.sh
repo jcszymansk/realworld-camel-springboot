@@ -8,9 +8,11 @@ ARTJSON='{"article":{"title":"'${ARTTITLE}'","description":"'${ARTDESC}'","body"
 
 : ${TOKEN:=Token abcde}
 
+: ${APIURL:=http://localhost:8080/api}
+
 
 curl -i -X POST \
   -H "Content-Type: application/json" \
   -H "Authorization: ${TOKEN}" \
   -d "${ARTJSON}" \
-  http://localhost:8080/api/articles
+  ${APIURL}/articles

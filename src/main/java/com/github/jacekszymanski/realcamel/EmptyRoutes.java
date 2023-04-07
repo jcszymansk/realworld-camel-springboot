@@ -11,7 +11,7 @@ public class EmptyRoutes extends RouteBuilder {
   private static final List<String> STARTER_URIS = List.of(
       //"direct:createArticle",
       //"direct:deleteArticle",
-      "direct:getArticle",
+      //"direct:getArticle",
       "direct:getArticles",
       "direct:getArticlesFeed",
       "direct:updateArticle",

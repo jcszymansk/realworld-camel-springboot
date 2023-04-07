@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,9 +44,11 @@ public class Article extends Base {
   private User author;
 
   @Column(nullable = false, updatable = false)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date createdAt;
 
   @Column(nullable = false)
+  @Temporal(TemporalType.TIMESTAMP)
   private Date updatedAt;
 
   @OneToMany(mappedBy = "article", fetch = FetchType.EAGER, cascade = { CascadeType.ALL })

@@ -1,0 +1,14 @@
+<route id="direct_getArticles"
+  routeConfigurationId="maybe-verify-login,generic-error"
+  xmlns="http://camel.apache.org/schema/spring">
+
+  <from uri="direct:getArticles" />
+
+  <setProperty name="__jpa_query">
+    <groovy>resource:classpath:scripts/article-feed-query.groovy</groovy>
+  </setProperty>
+
+  <toD uri="xjpa:org.example.model.Article?query=${exchangeProperty.__jpa_query}&amp;firstResult=${header.CamelXJpaFirstResult}&amp;maximumResults=${header.CamelXJpaMaximumResults}" />
+
+  <log message="Found ${body.size} articles" />
+</route>

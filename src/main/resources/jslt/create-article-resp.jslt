@@ -2,6 +2,12 @@
   "article" : . | {
     "tagList" : [for (.tagList) .tag],
     "slug": string(.id),
+    "favoritesCount": $headers.__favorites.FAVORITES,
+    "favorited": ($headers.__favorites.MYFAVORITE == 1),
+    "author": .author | {
+      "following": false,
+      * : .
+    },
     * : .
   }
 }

@@ -22,8 +22,15 @@
 
   <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?usePersist=true" />
 
+  <setProperty name="articleIds">
+    <groovy>[request.body.id]</groovy>
+  </setProperty>
+
+  <to uri="sql:classpath:sql/favorites-for-articles.sql?outputHeader=__favorites&amp;outputType=SelectOne" />
+
   <marshal><json /></marshal>
   <to uri="jslt:classpath:jslt/create-article-resp.jslt" />
+  <removeHeader name="__favorites" />
 
   <log message="Article created: ${body}" />
 

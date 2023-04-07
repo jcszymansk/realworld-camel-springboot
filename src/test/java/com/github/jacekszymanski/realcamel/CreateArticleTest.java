@@ -23,7 +23,7 @@ public class CreateArticleTest extends TestsBase {
 
   public static final String ENTRY_ENDPOINT = "direct:createArticle";
   public static final String VERIFY_LOGIN_ENDPOINT = "direct:verifyLogin";
-  public static final String SAVE_ENDPOINT = "jpa:com.github.jacekszymanski.realcamel.entity.Article";
+  public static final String SAVE_ENDPOINT = "jpa:com.github.jacekszymanski.realcamel.entity.Article*";
 
   @Test
   public void testCreateArticle() throws Exception {

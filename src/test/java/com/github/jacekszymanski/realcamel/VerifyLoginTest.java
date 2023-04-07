@@ -3,21 +3,16 @@ package com.github.jacekszymanski.realcamel;
 import com.github.jacekszymanski.realcamel.entity.User;
 import com.github.jacekszymanski.realcamel.testutil.UriUtil;
 import com.github.jacekszymanski.realcamel.testutil.UserUtil;
-import org.apache.camel.CamelContext;
 import org.apache.camel.Exchange;
-import org.apache.camel.ProducerTemplate;
 import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.persistence.NonUniqueResultException;
-import java.util.Collections;
-import java.util.List;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = CamelApplication.class)

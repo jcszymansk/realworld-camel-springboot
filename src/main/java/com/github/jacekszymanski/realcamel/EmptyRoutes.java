@@ -1,11 +1,8 @@
 package com.github.jacekszymanski.realcamel;
 
 import org.apache.camel.builder.RouteBuilder;
-import org.apache.camel.builder.TemplatedRouteBuilder;
 import org.springframework.stereotype.Component;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Component

@@ -5,8 +5,6 @@ import org.apache.camel.component.jpa.JpaComponent;
 import org.apache.camel.spi.annotations.Component;
 import org.apache.camel.util.ObjectHelper;
 import org.apache.camel.util.PropertiesHelper;
-import org.springframework.context.annotation.Bean;
-
 import java.util.Map;
 
 @Component("xjpa")

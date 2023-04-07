@@ -2,7 +2,6 @@ package com.github.jacekszymanski.realcamel.testutil;
 
 import java.util.List;
 
-import com.github.jacekszymanski.realcamel.entity.Article;
 import com.github.jacekszymanski.realcamel.model.CreateArticleRequest;
 import com.github.jacekszymanski.realcamel.model.NewArticle;
 

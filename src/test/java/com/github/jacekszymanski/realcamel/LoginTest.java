@@ -1,7 +1,6 @@
 package com.github.jacekszymanski.realcamel;
 
 import com.github.jacekszymanski.realcamel.entity.User;
-import com.github.jacekszymanski.realcamel.model.Login200Response;
 import com.github.jacekszymanski.realcamel.model.LoginRequest;
 import com.github.jacekszymanski.realcamel.model.LoginUser;
 import com.github.jacekszymanski.realcamel.testutil.UriUtil;

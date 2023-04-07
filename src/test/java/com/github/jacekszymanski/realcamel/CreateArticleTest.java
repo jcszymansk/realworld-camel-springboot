@@ -1,8 +1,6 @@
 package com.github.jacekszymanski.realcamel;
 
-import com.github.jacekszymanski.realcamel.model.CreateArticle201Response;
 import org.apache.camel.Exchange;
-import org.apache.camel.TypeConverter;
 import org.apache.camel.builder.AdviceWith;
 import org.apache.camel.component.mock.MockEndpoint;
 import org.apache.camel.test.spring.junit5.CamelSpringBootTest;
@@ -14,8 +12,6 @@ import com.github.jacekszymanski.realcamel.model.CreateArticleRequest;
 import com.github.jacekszymanski.realcamel.testutil.ArticleUtil;
 import com.github.jacekszymanski.realcamel.testutil.UriUtil;
 import com.github.jacekszymanski.realcamel.testutil.UserUtil;
-
-import java.util.Map;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = CamelApplication.class)

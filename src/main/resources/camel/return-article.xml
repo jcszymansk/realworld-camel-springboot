@@ -1,0 +1,23 @@
+<route id="direct_returnArticle"
+  routeConfigurationId="generic-error,no-such-object-error"
+  xmlns="http://camel.apache.org/schema/spring">
+
+  <from uri="direct:returnArticle" />
+
+  <setProperty name="articleIds">
+    <groovy>[request.body.id]</groovy>
+  </setProperty>
+
+  <to uri="sql:classpath:sql/favorites-for-articles.sql?outputHeader=__favorites&amp;outputType=SelectOne" />
+
+  <marshal><json /></marshal>
+  <to uri="jslt:classpath:jslt/create-article-resp.jslt" />
+  <removeHeader name="__favorites" />
+
+  <unmarshal><json
+    library="Jackson"
+    unmarshalType="com.github.jacekszymanski.realcamel.model.CreateArticle201Response"
+    disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"
+  /></unmarshal>
+
+</route>

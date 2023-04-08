@@ -7,7 +7,7 @@
   <marshal><json /></marshal>
   <unmarshal><json unmarshalType="java.util.Map" /></unmarshal>
 
-  <setProperty name="updateArticle"><simple>${body.article}</simple></setProperty>
+  <setProperty name="updateArticle"><simple>${body[article]}</simple></setProperty>
 
   <to uri="direct:findArticle" />
 
@@ -21,11 +21,11 @@
 
   <script><groovy><![CDATA[
     exchange.properties.updateArticle.each {
-      if (it.value != null) { request.body."${it.key}" = it.value }
+      if (it.value != null && !it.value.blank) { request.body."${it.key}" = it.value }
     }
   ]]></groovy></script>
 
-  <to uri="jpa:com.github.jacekszymanski.realcamel.model.Article" />
+  <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Article" />
 
   <to uri="direct:returnArticle" />
 

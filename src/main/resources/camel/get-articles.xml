@@ -14,19 +14,6 @@
 
   <log message="Found ${body.size} articles" />
 
-  <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy">
-    <simple>${body}</simple>
-
-    <to uri="direct:returnArticle" />
-
-    <!-- FIXME why simple ${body.article} doesn't work here? -->
-    <setBody><groovy>request.body.article</groovy></setBody>
-  </split>
-
-  <setBody><groovy><![CDATA[
-    new com.github.jacekszymanski.realcamel.model.GetArticlesFeed200Response()
-      .articlesCount(request.body.size())
-      .articles(request.body)
-  ]]></groovy></setBody>
+  <to uri="direct:returnArticles" />
 
 </route>

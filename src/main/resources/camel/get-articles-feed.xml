@@ -1,0 +1,41 @@
+<route id="direct_getArticlesFeed"
+  routeConfigurationId="verify-login,generic-error"
+  xmlns="http://camel.apache.org/schema/spring">
+
+  <from uri="direct:getArticlesFeed" />
+
+  <script><groovy>resource:classpath:scripts/limit-offset.groovy</groovy></script>
+
+  <setHeader name="CamelJpaParameters">
+    <groovy><![CDATA[
+      [ "userid": exchange.properties.loggedInUser.id ]
+    ]]></groovy>
+  </setHeader>
+
+  <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a, Follow f where
+      a.author.id = f.followed.id and f.follower.id = :userid
+      order by a.updatedAt desc
+    &amp;firstResult=${header.CamelXJpaFirstResult}&amp;maximumResults=${header.CamelXJpaMaximumResults}" />
+
+  <log message="Found ${body.size} articles" />
+
+  <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy">
+    <simple>${body}</simple>
+
+    <to uri="direct:returnArticle" />
+
+    <!-- FIXME why simple ${body.article} doesn't work here? -->
+    <setBody>
+      <groovy>request.body.article</groovy>
+    </setBody>
+  </split>
+
+  <setBody>
+    <groovy><![CDATA[
+    new com.github.jacekszymanski.realcamel.model.GetArticlesFeed200Response()
+      .articlesCount(request.body.size())
+      .articles(request.body)
+  ]]></groovy>
+  </setBody>
+
+</route>

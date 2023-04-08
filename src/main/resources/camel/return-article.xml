@@ -16,6 +16,7 @@
   <marshal><json /></marshal>
   <to uri="jslt:classpath:jslt/create-article-resp.jslt" />
   <removeHeader name="__favorites" />
+  <removeHeader name="__me_follower" />
 
   <unmarshal><json
     library="Jackson"

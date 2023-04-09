@@ -11,13 +11,7 @@
 
   <to uri="direct:findArticle" />
 
-  <!-- TODO: refactor with deleteArticle -->
-  <filter>
-    <simple>${body.author.id} != ${exchangeProperty.loggedInUser.id}</simple>
-
-    <throwException message="You are not the author of this article"
-                    exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
-  </filter>
+  <to uri="direct:verifyArticleAuthor" />
 
   <script><groovy><![CDATA[
     exchange.properties.updateArticle.each {

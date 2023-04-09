@@ -1,0 +1,11 @@
+<routes xmlns="http://camel.apache.org/schema/spring">
+  <route id="direct_verifyArticleAuthor" routeConfigurationId="verify-login,generic-error">
+    <from uri="direct:verifyArticleAuthor"/>
+
+    <filter>
+      <simple>${body.author.id} != ${exchangeProperty.loggedInUser.id}</simple>
+      <throwException message="You are not the author of this article"
+                      exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
+    </filter>
+  </route>
+</routes>

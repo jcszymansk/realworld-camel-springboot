@@ -4,12 +4,7 @@
 
   <to uri="direct:findArticle" />
 
-  <filter>
-    <simple>${body.author.id} != ${exchangeProperty.loggedInUser.id}</simple>
-
-    <throwException message="You are not the author of this article"
-                    exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
-  </filter>
+  <to uri="direct:verifyArticleAuthor" />
 
   <log message="Deleting article: ${body.id} ${body.title}" />
 

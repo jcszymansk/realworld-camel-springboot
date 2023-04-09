@@ -2,17 +2,23 @@
 
   <routeConfiguration id="verify-login">
     <interceptFrom uri="*">
+      <when>
+        <simple>${exchangeProperty.loggedInUser} == null</simple>
+      </when>
+
       <to uri="direct:verifyLogin"/>
     </interceptFrom>
   </routeConfiguration>
 
   <routeConfiguration id="maybe-verify-login">
     <interceptFrom uri="*">
-      <filter>
-        <header>Authorization</header>
+      <when>
+        <simple><![CDATA[
+          ${exchangeProperty.loggedInUser} == null && ${header.Authorization} != null
+        ]]></simple>
+      </when>
 
-        <to uri="direct:verifyLogin"/>
-      </filter>
+      <to uri="direct:verifyLogin"/>
     </interceptFrom>
   </routeConfiguration>
 

@@ -14,7 +14,7 @@
   <to uri="sql:classpath:sql/favorites-for-articles.sql?outputHeader=__favorites&amp;outputType=SelectOne" />
 
   <marshal><json /></marshal>
-  <to uri="jslt:classpath:jslt/create-article-resp.jslt" />
+  <to uri="jslt:classpath:jslt/article-resp.jslt" />
   <removeHeader name="__favorites" />
   <removeHeader name="__me_follower" />
 

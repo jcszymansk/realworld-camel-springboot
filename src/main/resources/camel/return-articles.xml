@@ -10,9 +10,9 @@
 
     <to uri="direct:returnArticle" />
 
-    <!-- FIXME why simple ${body.article} doesn't work here? -->
+    <!-- NOTE need to use .getArticle() as .article is a fluent setter which confuses camel -->
     <setBody>
-      <groovy>request.body.article</groovy>
+      <simple>${body.getArticle()}</simple>
     </setBody>
   </split>
 

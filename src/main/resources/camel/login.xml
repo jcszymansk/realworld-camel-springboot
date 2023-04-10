@@ -4,8 +4,7 @@
 
     <log message="received ${body}" loggingLevel="DEBUG" />
 
-    <marshal><json library="Jackson" /></marshal>
-    <unmarshal><json library="Jackson" unmarshalType="java.util.Map" /></unmarshal>
+    <to uri="direct:convertToMap" />
 
     <setProperty name="user">
       <simple>${body['user']}</simple>

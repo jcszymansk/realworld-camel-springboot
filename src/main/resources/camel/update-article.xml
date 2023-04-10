@@ -4,8 +4,7 @@
 
   <from uri="direct:updateArticle" />
 
-  <marshal><json /></marshal>
-  <unmarshal><json unmarshalType="java.util.Map" /></unmarshal>
+  <to uri="direct:convertToMap" />
 
   <setProperty name="updateArticle"><simple>${body[article]}</simple></setProperty>
 

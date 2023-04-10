@@ -2,8 +2,7 @@
   <route id="direct_updateCurrentUser" routeConfigurationId="verify-login,generic-error">
     <from uri="direct:updateCurrentUser"/>
 
-    <marshal><json library="Jackson" /></marshal>
-    <unmarshal><json library="Jackson" unmarshalType="java.util.Map" /></unmarshal>
+    <to uri="direct:convertToMap" />
 
     <log message="auth ${header.Authorization}" loggingLevel="DEBUG"/>
 

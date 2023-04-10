@@ -1,0 +1,6 @@
+<route xmlns="http://camel.apache.org/schema/spring">
+  <from uri="direct:convertToMap" />
+
+  <marshal><json library="Jackson" /></marshal>
+  <unmarshal><json library="Jackson" unmarshalType="java.util.Map" /></unmarshal>
+</route>

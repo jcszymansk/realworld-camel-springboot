@@ -4,7 +4,8 @@
 
   <from uri="direct:returnArticles" />
 
-  <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy">
+  <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy"
+         stopOnException="true">
     <simple>${body}</simple>
 
     <to uri="direct:returnArticle" />

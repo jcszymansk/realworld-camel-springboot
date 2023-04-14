@@ -139,3 +139,4 @@ target/
 .classpath
 .factorypath
 .project
+src/main/resources/jwt.key.txt

@@ -127,6 +127,12 @@
     </dependency>
 
     <dependency>
+      <groupId>com.github.jacekszymanski</groupId>
+      <artifactId>camel-jwt</artifactId>
+      <version>1.0-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
       <groupId>com.h2database</groupId>
       <artifactId>h2</artifactId>
     </dependency>
@@ -211,5 +217,17 @@
     </plugins>
   </build>
 
+  <repositories>
+    <repository>
+      <id>mymaven2repo</id>
+      <url>https://raw.githubusercontent.com/jacekszymanski/maven2/maven2</url>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+    </repository>
+  </repositories>
 
 </project>

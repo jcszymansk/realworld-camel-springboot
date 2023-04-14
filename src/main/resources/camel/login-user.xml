@@ -6,14 +6,22 @@
     <marshal><json /></marshal>
     <to uri="jsonata:jsonata/create-user-resp.jsonata?inputType=JsonString" />
 
-    <log message="transformed ${body}" loggingLevel="DEBUG" />
+     <log message="transformed ${body}" loggingLevel="DEBUG" />
 
     <unmarshal>
       <json unmarshalType="com.github.jacekszymanski.realcamel.model.Login200Response"
             disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"/>
     </unmarshal>
 
-    <to uri="language:groovy:request.body.user.token = request.body.user.username?transform=false" />
+    <setProperty name="jwt_claims"><groovy><![CDATA[
+      """{"sub": "${request.body.user.username}" }"""
+    ]]></groovy></setProperty>
+
+    <to uri="jwt:HS256:Create?privateKeyLocation=classpath:jwt.key.txt&amp;source=.jwt_claims&amp;target=.jwt_token" />
+
+    <to uri="language:groovy:request.body.user.token = exchange.properties.jwt_token?transform=false" />
+
+    <removeProperty name="jwt_token" />
 
   </route>
 

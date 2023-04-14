@@ -1,7 +1,4 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <!-- now there's no JWT support in Camel; I plan to code it, but for now
-       a poor fake is enough to fool postman tests.
-  -->
   <route id="direct_verifyLogin" routeConfigurationId="generic-error,verify-login-error-no-user">
     <from uri="direct:verifyLogin"/>
 
@@ -12,14 +9,10 @@
                       exceptionType="com.github.jacekszymanski.realcamel.UnauthorizedException" />
     </filter>
 
-    <script>
-      <groovy>resource:classpath:scripts/token.groovy</groovy>
-    </script>
+    <to uri="jwt:HS256:Decode?privateKeyLocation=classpath:jwt.key.txt&amp;source=Authorization&amp;target=.jwt_token&amp;outputType=Map" />
 
-    <log message="got token ${exchangeProperty.jwt_token}"
-         loggingLevel="DEBUG"/>
+    <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${exchangeProperty.jwt_token['sub']}&amp;outputType=SelectOne&amp;outputTarget=%loggedInUser" />
 
-    <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${exchangeProperty.jwt_token['username']}&amp;outputType=SelectOne&amp;outputTarget=%loggedInUser" />
-
+    <removeProperty name="jwt_token" />
   </route>
 </routes>

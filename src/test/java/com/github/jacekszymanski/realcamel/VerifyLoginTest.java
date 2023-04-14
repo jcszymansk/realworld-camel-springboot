@@ -20,6 +20,7 @@ public class VerifyLoginTest extends TestsBase {
 
   private static final String JPA_ENDPOINT_PATTERN = "xjpa:com.github.jacekszymanski.realcamel.entity.User*";
   private static final String ENTRY_ENDPOINT = "direct:verifyLogin";
+  private static final String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNkZSJ9.iFBORfKYZ5YTir5cMVYMjEZ8sveV-Vg-lW6SShWkCLI";
 
   private static boolean adviced = false;
 
@@ -52,7 +53,7 @@ public class VerifyLoginTest extends TestsBase {
 
     final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
       exchange.getIn().setBody(body);
-      exchange.getIn().setHeader("Authorization", "Token xxx");
+      exchange.getIn().setHeader("Authorization", "Token " + TOKEN);
     });
 
     Assertions.assertEquals(body, resultExchange.getIn().getBody());
@@ -70,7 +71,7 @@ public class VerifyLoginTest extends TestsBase {
 
     final Exchange resultExchange = producerTemplate.send(ENTRY_ENDPOINT, exchange -> {
       exchange.getIn().setBody(body);
-      exchange.getIn().setHeader("Authorization", "Token xxx");
+      exchange.getIn().setHeader("Authorization", "Token " + TOKEN);
     });
 
     Assertions.assertEquals(401, resultExchange.getIn().getHeader(Exchange.HTTP_RESPONSE_CODE));

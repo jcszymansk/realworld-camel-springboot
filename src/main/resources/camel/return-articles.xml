@@ -19,7 +19,7 @@
   <setBody>
     <groovy><![CDATA[
     new com.github.jacekszymanski.realcamel.model.GetArticlesFeed200Response()
-      .articlesCount(request.body.size())
+      .articlesCount(exchange.properties.__articlesCount as int)
       .articles(request.body)
   ]]></groovy>
   </setBody>

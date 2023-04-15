@@ -15,7 +15,7 @@ request.headers['CamelXJpaFirstResult'] = (request.headers.offset ?: 0) as Integ
 
 // and the query
 result = """\
-    select a from Article a \
+    from Article a \
       ${tag == null ? '' : ', Tag t'} \
       ${liker == null ? '' : ', Favorite f'} \
     where \
@@ -23,4 +23,4 @@ result = """\
       ${author == null ? '' : 'and a.author.username = :author'} \
       ${tag == null ? '' : 'and t.article.id = a.id and t.tag = :tag'} \
       ${liker == null ? '' : 'and f.article.id = a.id and f.user.username = :liker'} \
-""".trim() // need to trim as Camel will infer update if the query doesn't start with select
+"""

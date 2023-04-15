@@ -12,11 +12,28 @@
     ]]></groovy>
   </setHeader>
 
-  <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a, Follow f where
+  <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a, Follow f where
       a.author.id = f.followed.id and f.follower.id = :userid
       order by a.updatedAt desc" />
 
   <log message="Found ${body.size} articles" />
+
+  <choice>
+    <when><simple><![CDATA[
+      ${body.size} == ${header.CamelXJpaMaximumResults}
+    ]]></simple>
+      <removeHeaders pattern="CamelXJpa*" />
+
+      <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select count(a) from Article a, Follow f where
+        a.author.id = f.followed.id and f.follower.id = :userid
+        &amp;outputType=SelectOne&amp;outputTarget=%__articlesCount" />
+    </when>
+    <otherwise>
+      <setProperty name="__articlesCount">
+        <groovy>request.body.size() + request.headers.CamelXJpaFirstResult</groovy>
+      </setProperty>
+    </otherwise>
+  </choice>
 
   <to uri="direct:returnArticles" />
 

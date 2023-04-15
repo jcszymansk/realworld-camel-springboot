@@ -8,4 +8,14 @@
     <parameter name="objectType" value="Comment"/>
   </templatedRoute>
 
+  <templatedRoute routeTemplateRef="returnSingle">
+    <parameter name="objectType" value="Article"/>
+    <parameter name="returnClass" value="CreateArticle201Response"/>
+  </templatedRoute>
+
+  <templatedRoute routeTemplateRef="returnSingle">
+    <parameter name="objectType" value="Comment"/>
+    <parameter name="returnClass" value="CreateArticleComment200Response"/>
+  </templatedRoute>
+
 </templatedRoutes>

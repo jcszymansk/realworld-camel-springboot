@@ -1,0 +1,13 @@
+<route
+    id="direct_getArticleLikes"
+    routeConfigurationId="generic-error"
+    xmlns="http://camel.apache.org/schema/spring">
+  <from uri="direct:getArticleLikes"/>
+
+  <setProperty name="articleIds">
+    <groovy>[request.body.id]</groovy>
+  </setProperty>
+
+  <to uri="sql:classpath:sql/favorites-for-articles.sql?outputHeader=__favorites&amp;outputType=SelectOne" />
+
+</route>

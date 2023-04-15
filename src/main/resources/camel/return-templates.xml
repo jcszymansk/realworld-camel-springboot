@@ -18,4 +18,32 @@
       </split>
     </route>
   </routeTemplate>
+
+  <routeTemplate id="returnSingle">
+    <templateParameter name="objectType" />
+    <templateParameter name="returnClass" />
+    <route id="direct_return{{objectType}}"
+           routeConfigurationId="generic-error,no-such-object-error"
+           xmlns="http://camel.apache.org/schema/spring">
+
+      <from uri="direct:return{{objectType}}" />
+
+      <setProperty name="__checkFollow"><simple>${body.author}</simple></setProperty>
+      <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
+
+      <to uri="direct:get{{objectType}}Likes?failIfNoConsumers=false&amp;block=false" />
+
+      <marshal><json /></marshal>
+      <toD uri="language:groovy:&quot;jslt:classpath:jslt/${'{{objectType}}'.toLowerCase()}-resp.jslt&quot;" />
+      <removeHeaders pattern="^__.*" />
+
+      <unmarshal><json
+          library="Jackson"
+          unmarshalType="com.github.jacekszymanski.realcamel.model.{{returnClass}}"
+          disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"
+      /></unmarshal>
+
+    </route>
+
+  </routeTemplate>
 </routeTemplates>

@@ -14,8 +14,7 @@
 
   <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a, Follow f where
       a.author.id = f.followed.id and f.follower.id = :userid
-      order by a.updatedAt desc
-    &amp;firstResult=${header.CamelXJpaFirstResult}&amp;maximumResults=${header.CamelXJpaMaximumResults}" />
+      order by a.updatedAt desc" />
 
   <log message="Found ${body.size} articles" />
 

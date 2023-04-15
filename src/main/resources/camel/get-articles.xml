@@ -10,7 +10,7 @@
 
   <log message="Querying for articles: ${exchangeProperty.__jpa_query} with params ${headers.CamelJpaParameters}" />
 
-  <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=${exchangeProperty.__jpa_query}&amp;firstResult=${header.CamelXJpaFirstResult}&amp;maximumResults=${header.CamelXJpaMaximumResults}" />
+  <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=${exchangeProperty.__jpa_query}" />
 
   <log message="Found ${body.size} articles" />
 

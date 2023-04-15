@@ -1,0 +1,31 @@
+<route
+    id="direct_getArticleComments"
+    routeConfigurationId="generic-error,no-such-object-error,maybe-verify-login"
+    xmlns="http://camel.apache.org/schema/spring">
+  <from uri="direct:getArticleComments" />
+
+  <to uri="direct:findArticle" />
+
+  <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Comment?query=select c from Comment c
+      where c.article = :article order by c.createdAt
+      &amp;parameters.article=${body}" />
+
+  <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy"
+         stopOnException="true">
+    <simple>${body}</simple>
+
+    <to uri="direct:returnComment" />
+
+    <setBody>
+      <simple>${body.getComment()}</simple>
+    </setBody>
+  </split>
+
+  <setBody>
+    <groovy><![CDATA[
+    new com.github.jacekszymanski.realcamel.model.GetArticleComments200Response()
+      .comments(request.body)
+  ]]></groovy>
+  </setBody>
+
+</route>

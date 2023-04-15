@@ -1,9 +1,11 @@
 package com.github.jacekszymanski.realcamel.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -23,6 +25,8 @@ import java.util.Date;
 @ToString(callSuper = true, exclude = { "body", "article" })
 @EqualsAndHashCode(callSuper = true, exclude = { "body", "article" })
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Comment extends Base {
 
   @Column(nullable = false)

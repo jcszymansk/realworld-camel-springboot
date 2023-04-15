@@ -38,14 +38,19 @@ public class XJpaProducer extends JpaProducer {
     transactionStrategy = endpoint.getTransactionStrategy();
   }
 
-  // This is unfortunately private in the superclass.
   @SuppressWarnings({"unchecked", "deprecation"})
   private void configureParameters(Query query, Exchange exchange) {
-    int maxResults = getEndpoint().getMaximumResults();
+    final int maxResults =
+        Objects.requireNonNullElse(
+            exchange.getIn().getHeader(XJpaConstants.XJPA_MAXIMUM_RESULTS, Integer.class),
+            getEndpoint().getMaximumResults());
     if (maxResults > 0) {
       query.setMaxResults(maxResults);
     }
-    final int firstResult = ((XJpaEndpoint) getEndpoint()).getFirstResult();
+    final int firstResult =
+        Objects.requireNonNullElse(
+            exchange.getIn().getHeader(XJpaConstants.XJPA_FIRST_RESULT, Integer.class),
+            ((XJpaEndpoint) getEndpoint()).getFirstResult());
     if (firstResult > 0) {
       query.setFirstResult(firstResult);
     }

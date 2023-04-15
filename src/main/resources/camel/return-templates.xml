@@ -1,0 +1,21 @@
+<routeTemplates xmlns="http://camel.apache.org/schema/spring">
+  <routeTemplate id="prepareReturnMultiple">
+    <templateParameter name="objectType"/>
+    <route id="direct_prepareReturn{{objectType}}s">
+      <from uri="direct:prepareReturn{{objectType}}s"/>
+
+      <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy"
+             stopOnException="true">
+        <simple>${body}</simple>
+
+        <to uri="direct:return{{objectType}}"/>
+
+        <!-- NOTE need to use .get{{objectType}}() as .{{objectType}} would conflict with
+             a fluent setter which confuses camel -->
+        <setBody>
+          <simple>${body.get{{objectType}}()}</simple>
+        </setBody>
+      </split>
+    </route>
+  </routeTemplate>
+</routeTemplates>

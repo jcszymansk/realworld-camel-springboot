@@ -4,17 +4,7 @@
 
   <from uri="direct:returnArticles" />
 
-  <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy"
-         stopOnException="true">
-    <simple>${body}</simple>
-
-    <to uri="direct:returnArticle" />
-
-    <!-- NOTE need to use .getArticle() as .article is a fluent setter which confuses camel -->
-    <setBody>
-      <simple>${body.getArticle()}</simple>
-    </setBody>
-  </split>
+  <to uri="direct:prepareReturnArticles" />
 
   <setBody>
     <groovy><![CDATA[
@@ -23,6 +13,5 @@
       .articles(request.body)
   ]]></groovy>
   </setBody>
-
 
 </route>

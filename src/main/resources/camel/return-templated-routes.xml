@@ -1,0 +1,11 @@
+<templatedRoutes xmlns="http://camel.apache.org/schema/spring">
+
+  <templatedRoute routeTemplateRef="prepareReturnMultiple">
+    <parameter name="objectType" value="Article"/>
+  </templatedRoute>
+
+  <templatedRoute routeTemplateRef="prepareReturnMultiple">
+    <parameter name="objectType" value="Comment"/>
+  </templatedRoute>
+
+</templatedRoutes>

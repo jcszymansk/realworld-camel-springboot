@@ -10,16 +10,7 @@
       where c.article = :article order by c.createdAt
       &amp;parameters.article=${body}" />
 
-  <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy"
-         stopOnException="true">
-    <simple>${body}</simple>
-
-    <to uri="direct:returnComment" />
-
-    <setBody>
-      <simple>${body.getComment()}</simple>
-    </setBody>
-  </split>
+  <to uri="direct:prepareReturnComments" />
 
   <setBody>
     <groovy><![CDATA[

@@ -1,0 +1,22 @@
+<route
+    id="direct_returnComment"
+    routeConfigurationId="generic-error"
+    xmlns="http://camel.apache.org/schema/spring">
+
+  <from uri="direct:returnComment"/>
+
+  <setProperty name="__checkFollow"><simple>${body.author}</simple></setProperty>
+  <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
+
+  <marshal><json /></marshal>
+  <to uri="jslt:classpath:jslt/comment-resp.jslt" />
+
+  <removeHeader name="__me_follower" />
+
+  <unmarshal><json
+    library="Jackson"
+    unmarshalType="com.github.jacekszymanski.realcamel.model.CreateArticleComment200Response"
+    disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES" />
+  </unmarshal>
+
+</route>

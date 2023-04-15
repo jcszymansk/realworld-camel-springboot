@@ -48,12 +48,11 @@ the `pom.xml` file.
 is a component that extends the `camel-jpa` component to add
 the following features:
 - `outputType` parameter to specify the type of the output, which can be
-`SelectList` (the default `camel-jpa` behavior) or 
-`SelectOne`, which will throw an exception
-if no results or more than one result is found.
+`Default` which returns a list on queries and an object or null on finds (the default `camel-jpa` behavior); or 
+`SelectOne`, which will return a single object or throw an exception if no results or more than one result is found.
 - `outputTarget` parameter to specify where to put the output, if not
 into the message body.
-- `firstResult` to specify the offset in the generated sql.
+- `firstResult` to specify the offset in the generated SQL.
 
 This component is embedded in this project, in the 
 `com.github.jacekszymanski.camel.xjpa` package.

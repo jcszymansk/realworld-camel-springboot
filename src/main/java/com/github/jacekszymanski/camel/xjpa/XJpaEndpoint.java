@@ -29,7 +29,7 @@ public class XJpaEndpoint extends JpaEndpoint {
   @UriParam(name="outputType",
       label = "producer",
       description = "What type of output to produce on queries/finds:\n"
-                  + "SelectList: the default, the answer is a list of results\n"
+                  + "Default: the default, the answer is a list of results (or a single result/null in finds)\n"
                   + "SelectOne: exactly one result, if the query returns no results or "
                   + "more than one, an exception is thrown."
   )

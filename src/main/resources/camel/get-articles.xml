@@ -14,21 +14,7 @@
 
   <log message="Found ${body.size} articles" />
 
-  <choice>
-    <when><simple><![CDATA[
-      ${body.size} == ${header.CamelXJpaMaximumResults}
-    ]]></simple>
-      <removeHeaders pattern="CamelXJpa*" />
-
-      <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select count(a) ${exchangeProperty.__jpa_query}
-        &amp;outputType=SelectOne&amp;outputTarget=%__articlesCount" />
-    </when>
-    <otherwise>
-      <setProperty name="__articlesCount">
-        <groovy>request.body.size() + request.headers.CamelXJpaFirstResult</groovy>
-      </setProperty>
-    </otherwise>
-  </choice>
+  <to uri="direct:getArticlesCount" />
 
   <to uri="direct:returnArticles" />
 

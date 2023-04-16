@@ -140,7 +140,7 @@ public class XJpaProducer extends JpaProducer {
     if (StringUtils.isBlank(outputTarget)) {
       getTargetMessage(exchange).setBody(answer);
     }
-    else if (outputTarget.startsWith("%")) {
+    else if (outputTarget.startsWith(".")) {
       exchange.setProperty(outputTarget.substring(1), answer);
     }
     else {

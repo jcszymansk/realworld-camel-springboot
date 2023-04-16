@@ -20,7 +20,7 @@ public class XJpaEndpoint extends JpaEndpoint {
   @UriParam(name="outputTarget",
       label = "producer",
       description = "Where to put the query result instead of body:\n"
-                  + "if it starts with %, it is interpreted as an exchange property, "
+                  + "if it starts with . (a dot), it is interpreted as an exchange property, "
                   + "otherwise as a message header."
   )
   private String outputTarget;

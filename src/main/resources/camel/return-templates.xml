@@ -1,7 +1,8 @@
 <routeTemplates xmlns="http://camel.apache.org/schema/spring">
   <routeTemplate id="prepareReturnMultiple">
     <templateParameter name="objectType"/>
-    <route id="direct_prepareReturn{{objectType}}s">
+    <route id="direct_prepareReturn{{objectType}}s"
+           routeConfigurationId="generic-error">
       <from uri="direct:prepareReturn{{objectType}}s"/>
 
       <split aggregationStrategy="#class:com.github.jacekszymanski.realcamel.ListAggregationStrategy"

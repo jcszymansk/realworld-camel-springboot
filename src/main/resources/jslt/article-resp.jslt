@@ -1,6 +1,15 @@
+def sort(array)
+  if (size($array) <= 1)
+    $array
+  else
+    flatten([
+      sort([for ($array[1:]) . if (. < $array[0])]),
+      $array[0],
+      sort([for ($array[1:]) . if (. >= $array[0])])])
+
 {
   "article" : . | {
-    "tagList" : [for (.tagList) .tag],
+    "tagList" : sort([for (.tagList) .tag]),
     "slug": string(.id),
     "favoritesCount": $headers.__favorites.FAVORITES,
     "favorited": ($headers.__favorites.MYFAVORITE == 1),

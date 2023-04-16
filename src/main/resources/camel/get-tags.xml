@@ -1,0 +1,13 @@
+<route
+    id="direct_getTags"
+    routeConfigurationId="generic-error"
+    xmlns="http://camel.apache.org/schema/spring">
+
+  <from uri="direct:getTags"/>
+
+  <to uri="sql:classpath:sql/tags.sql?outputType=SelectList"/>
+
+  <setBody><groovy>
+    [ tags: request.body.stream().map { it.TAG }.toArray() ]
+  </groovy></setBody>
+</route>

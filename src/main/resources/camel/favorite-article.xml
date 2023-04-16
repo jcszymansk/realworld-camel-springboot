@@ -1,0 +1,15 @@
+<route
+    id="direct_createArticleFavorite"
+    xmlns="http://camel.apache.org/schema/spring"
+    routeConfigurationId="verify-login,generic-error,no-such-object-error,ignore-duplicate-error">
+
+  <from uri="direct:createArticleFavorite"/>
+
+  <to uri="direct:findArticle"/>
+
+  <to uri="sql:classpath:sql/favorite.sql?outputHeader=__ignore"/>
+  <removeHeader name="__ignore"/>
+
+  <to uri="direct:returnArticle"/>
+
+</route>

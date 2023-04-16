@@ -18,7 +18,7 @@ public class EmptyRoutes extends RouteBuilder {
       //"direct:createArticleComment",
       //"direct:deleteArticleComment",
       //"direct:getArticleComments",
-      "direct:createArticleFavorite",
+      //"direct:createArticleFavorite",
       "direct:deleteArticleFavorite",
       //"direct:followUserByUsername",
       //"direct:getProfileByUsername",

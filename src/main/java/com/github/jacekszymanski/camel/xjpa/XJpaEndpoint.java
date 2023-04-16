@@ -9,9 +9,10 @@ import org.apache.camel.spi.UriEndpoint;
 import org.apache.camel.spi.UriParam;
 
 /**
- * XJPA extends the Camel's JPA endpoint with two new options:
+ * XJPA extends the Camel's JPA endpoint with three new options:
  * - outputTarget, to put the result in a header/property instead of the message body
  * - outputType, if SelectOne, it ensures that exactly one result is returned (or an exception is thrown).
+ * - firstResult, the index of the first result to return.
  */
 @UriEndpoint(scheme = "xjpa", syntax = "xjpa:entityType", title = "XJPA", headersClass = JpaConstants.class)
 public class XJpaEndpoint extends JpaEndpoint {

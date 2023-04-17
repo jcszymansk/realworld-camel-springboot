@@ -6,7 +6,7 @@
     <to uri="direct:prepareReturnUser" />
 
     <marshal><json /></marshal>
-    <to uri="jslt:jslt/login-resp.jslt" />
+    <to uri="jslt:jslt/user-resp.jslt" />
 
     <unmarshal>
       <json unmarshalType="com.github.jacekszymanski.realcamel.model.Login200Response"

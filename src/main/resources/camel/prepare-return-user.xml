@@ -1,0 +1,16 @@
+<route
+    id="direct_prepareReturnUser"
+    routeConfigurationId="generic-error"
+    xmlns="http://camel.apache.org/schema/spring">
+  <from uri="direct:prepareReturnUser" />
+
+  <setProperty name="__jwt_claims"><groovy><![CDATA[
+      """{"sub": "${request.body.username}" }"""
+    ]]></groovy></setProperty>
+
+  <to uri="jwt:HS256:Create?privateKeyLocation=classpath:jwt.key.txt&amp;source=.__jwt_claims&amp;target=__jwt_token" />
+
+  <!-- to avoid checking whether I am following myself, which wouldn't be used anyway -->
+  <setHeader name="__me_follower"><constant>0</constant></setHeader>
+
+</route>

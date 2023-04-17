@@ -3,11 +3,7 @@
   <route id="direct_returnUser" routeConfigurationId="return-cleanup">
     <from uri="direct:returnUser" />
 
-    <setProperty name="__jwt_claims"><groovy><![CDATA[
-      """{"sub": "${request.body.username}" }"""
-    ]]></groovy></setProperty>
-
-    <to uri="jwt:HS256:Create?privateKeyLocation=classpath:jwt.key.txt&amp;source=.__jwt_claims&amp;target=__jwt_token" />
+    <to uri="direct:prepareReturnUser" />
 
     <marshal><json /></marshal>
     <to uri="jslt:jslt/login-resp.jslt" />

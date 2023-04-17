@@ -1,7 +1,9 @@
 <routeConfigurations>
-  <routeConfiguration id="verify-login-error-no-user">
+  <routeConfiguration id="verify-login-error">
     <onException>
       <exception>javax.persistence.NonUniqueResultException</exception>
+      <exception>org.jose4j.jwt.consumer.InvalidJwtException</exception>
+      <exception>org.jose4j.jwt.consumer.InvalidJwtSignatureException</exception>
       <handled><constant>true</constant></handled>
 
       <setProperty name="ownErrorMessage">
@@ -11,7 +13,12 @@
         <constant resultType="java.lang.Integer">401</constant>
       </setHeader>
 
+      <!-- log and clear the exception so as not to leak details to a possible attacker -->
+      <log message="Error: ${exception.message} ${exception.stacktrace}" />
+      <removeProperty name="CamelExceptionCaught" />
+
       <to uri="direct:returnError" />
     </onException>
   </routeConfiguration>
+
 </routeConfigurations>

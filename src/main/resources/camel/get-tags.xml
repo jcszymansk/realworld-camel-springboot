@@ -7,7 +7,9 @@
 
   <to uri="sql:classpath:sql/tags.sql?outputType=SelectList"/>
 
-  <setBody><groovy>
-    [ tags: request.body.stream().map { it.TAG }.toArray() ]
-  </groovy></setBody>
+  <marshal><json /></marshal>
+
+  <to uri="jslt:classpath:jslt/tags-resp.jslt"/>
+
+  <unmarshal><json unmarshalType="com.github.jacekszymanski.realcamel.model.GetTags200Response" /></unmarshal>
 </route>

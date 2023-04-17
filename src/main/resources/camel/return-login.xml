@@ -1,6 +1,6 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
 
-  <route id="direct_returnLogin">
+  <route id="direct_returnLogin" routeConfigurationId="return-cleanup">
     <from uri="direct:returnLogin" />
 
     <marshal><json /></marshal>

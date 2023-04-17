@@ -14,10 +14,11 @@
     </groovy>
   </setHeader>
 
-  <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a where a.id = :id
-      &amp;outputType=SelectOne" />
+  <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a where a.id = :id
+      &amp;outputType=SelectOne${exchangeProperty.__xjpa_opts}" />
 
   <removeProperty name="__article_id" />
+  <removeProperty name="__xjpa_opts" />
   <removeHeader name="CamelJpaParameters" />
 
 </route>

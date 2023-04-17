@@ -1,6 +1,6 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
   <route id="direct_followUserByUsername" routeConfigurationId="verify-login,generic-error,ignore-duplicate-error">
-    <from uri="direct:followUserByUsername"/>
+    <from uri="direct:followUserByUsername" />
 
     <to uri="direct:getUserByName" />
 

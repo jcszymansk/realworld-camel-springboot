@@ -2,7 +2,7 @@
   <route id="direct_getCurrentUser" routeConfigurationId="verify-login,generic-error">
     <from uri="direct:getCurrentUser" />
 
-    <log message="auth ${header.Authorization}" loggingLevel="DEBUG"/>
+    <log message="auth ${header.Authorization}" loggingLevel="DEBUG" />
 
     <setBody>
       <simple>${exchangeProperty.loggedInUser}</simple>

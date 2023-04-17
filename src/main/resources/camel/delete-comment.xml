@@ -3,7 +3,7 @@
     routeConfigurationId="verify-login,generic-error,no-such-object-error,return-empty-200"
     xmlns="http://camel.apache.org/schema/spring">
 
-  <from uri="direct:deleteArticleComment"/>
+  <from uri="direct:deleteArticleComment" />
 
   <setBody><simple resultType="java.lang.Long">${header.id}</simple></setBody>
   <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Comment?findEntity=true&amp;outputType=SelectOne" />

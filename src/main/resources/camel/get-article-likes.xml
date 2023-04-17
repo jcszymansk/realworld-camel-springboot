@@ -2,7 +2,7 @@
     id="direct_getArticleLikes"
     routeConfigurationId="generic-error"
     xmlns="http://camel.apache.org/schema/spring">
-  <from uri="direct:getArticleLikes"/>
+  <from uri="direct:getArticleLikes" />
 
   <setProperty name="articleIds">
     <groovy>[request.body.id]</groovy>

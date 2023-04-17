@@ -1,12 +1,12 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
   <route id="direct_updateCurrentUser" routeConfigurationId="verify-login,generic-error">
-    <from uri="direct:updateCurrentUser"/>
+    <from uri="direct:updateCurrentUser" />
 
     <to uri="direct:convertToMap" />
 
-    <log message="auth ${header.Authorization}" loggingLevel="DEBUG"/>
+    <log message="auth ${header.Authorization}" loggingLevel="DEBUG" />
 
-    <log message="body ${body}" loggingLevel="DEBUG"/>
+    <log message="body ${body}" loggingLevel="DEBUG" />
 
     <script>
       <groovy>resource:classpath:scripts/update-user.groovy</groovy>

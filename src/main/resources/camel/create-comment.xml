@@ -1,12 +1,12 @@
 <route id="direct_createArticleComment"
        xmlns="http://camel.apache.org/schema/spring"
        routeConfigurationId="verify-login,generic-error">
-  <from uri="direct:createArticleComment"/>
+  <from uri="direct:createArticleComment" />
 
   <setProperty name="__comment"><simple>${body}</simple></setProperty>
 
   <!-- TODO this is evil, need to store the article right away in the property without touching body -->
-  <to uri="direct:findArticle"/>
+  <to uri="direct:findArticle" />
   <setProperty name="__article"><simple>${body}</simple></setProperty>
 
   <setBody><groovy>
@@ -17,8 +17,8 @@
       .build()
   </groovy></setBody>
 
-  <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Comment?usePersist=true"/>
+  <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Comment?usePersist=true" />
 
-  <to uri="direct:returnComment"/>
+  <to uri="direct:returnComment" />
 
 </route>

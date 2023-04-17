@@ -6,7 +6,7 @@
         <constant>true</constant>
       </handled>
 
-      <log message="exception ${exception}" loggingLevel="DEBUG"/>
+      <log message="exception ${exception}" loggingLevel="DEBUG" />
 
       <setHeader name="CamelHttpResponseCode">
         <simple>${exception.reason}</simple>
@@ -22,7 +22,7 @@
       </handled>
 
       <log message="exception ${exception} ${messageHistory} ${exception.stacktrace}"
-           loggingLevel="WARN"/>
+           loggingLevel="WARN" />
 
       <setHeader name="CamelHttpResponseCode">
         <constant>500</constant>

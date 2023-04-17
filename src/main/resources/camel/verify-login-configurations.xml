@@ -6,7 +6,7 @@
         <simple>${exchangeProperty.loggedInUser} == null</simple>
       </when>
 
-      <to uri="direct:verifyLogin"/>
+      <to uri="direct:verifyLogin" />
     </interceptFrom>
   </routeConfiguration>
 
@@ -18,7 +18,7 @@
         ]]></simple>
       </when>
 
-      <to uri="direct:verifyLogin"/>
+      <to uri="direct:verifyLogin" />
     </interceptFrom>
   </routeConfiguration>
 

@@ -1,6 +1,6 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
   <route id="direct_unfollowUserByUsername" routeConfigurationId="verify-login,generic-error">
-    <from uri="direct:unfollowUserByUsername"/>
+    <from uri="direct:unfollowUserByUsername" />
 
     <to uri="direct:getUserByName" />
 

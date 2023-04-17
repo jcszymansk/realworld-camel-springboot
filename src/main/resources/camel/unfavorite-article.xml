@@ -3,13 +3,13 @@
     xmlns="http://camel.apache.org/schema/spring"
     routeConfigurationId="verify-login,generic-error,no-such-object-error,ignore-duplicate-error">
 
-  <from uri="direct:deleteArticleFavorite"/>
+  <from uri="direct:deleteArticleFavorite" />
 
-  <to uri="direct:findArticle"/>
+  <to uri="direct:findArticle" />
 
-  <to uri="sql:classpath:sql/unfavorite.sql?outputHeader=__ignore"/>
-  <removeHeader name="__ignore"/>
+  <to uri="sql:classpath:sql/unfavorite.sql?outputHeader=__ignore" />
+  <removeHeader name="__ignore" />
 
-  <to uri="direct:returnArticle"/>
+  <to uri="direct:returnArticle" />
 
 </route>

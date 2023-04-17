@@ -1,5 +1,5 @@
 <route id="direct_followOneselfCheck" routeConfigurationId="generic-error" xmlns="http://camel.apache.org/schema/spring">
-  <from uri="direct:followOneselfCheck"/>
+  <from uri="direct:followOneselfCheck" />
 
   <filter>
     <simple>${body.id} == ${exchangeProperty.loggedInUser.id}</simple>

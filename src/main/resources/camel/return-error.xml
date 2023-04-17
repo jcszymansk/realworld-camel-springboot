@@ -9,7 +9,7 @@
     </setBody>
 
     <unmarshal>
-      <json unmarshalType="com.github.jacekszymanski.realcamel.model.GenericErrorModel"/>
+      <json unmarshalType="com.github.jacekszymanski.realcamel.model.GenericErrorModel" />
     </unmarshal>
 
     <script>
@@ -29,7 +29,7 @@
       </groovy>
     </script>
 
-    <stop/>
+    <stop />
 
   </route>
 </routes>

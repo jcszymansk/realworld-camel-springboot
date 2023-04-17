@@ -3,13 +3,13 @@
     routeConfigurationId="generic-error"
     xmlns="http://camel.apache.org/schema/spring">
 
-  <from uri="direct:getTags"/>
+  <from uri="direct:getTags" />
 
-  <to uri="sql:classpath:sql/tags.sql?outputType=SelectList"/>
+  <to uri="sql:classpath:sql/tags.sql?outputType=SelectList" />
 
   <marshal><json /></marshal>
 
-  <to uri="jslt:classpath:jslt/tags-resp.jslt"/>
+  <to uri="jslt:classpath:jslt/tags-resp.jslt" />
 
   <unmarshal><json unmarshalType="com.github.jacekszymanski.realcamel.model.GetTags200Response" /></unmarshal>
 </route>

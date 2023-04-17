@@ -2,7 +2,7 @@
   routeConfigurationId="generic-error,no-such-object-error"
   xmlns="http://camel.apache.org/schema/spring">
 
-  <from uri="direct:findArticle"/>
+  <from uri="direct:findArticle" />
 
   <setBody>
     <groovy resultType="java.lang.Long">resource:classpath:scripts/resolve-slug.groovy</groovy>

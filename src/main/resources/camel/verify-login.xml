@@ -1,6 +1,6 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
   <route id="direct_verifyLogin" routeConfigurationId="generic-error,verify-login-error">
-    <from uri="direct:verifyLogin"/>
+    <from uri="direct:verifyLogin" />
 
     <filter>
       <simple>${header.Authorization} == null</simple>

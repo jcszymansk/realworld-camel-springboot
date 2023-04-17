@@ -1,26 +1,26 @@
 <templatedRoutes xmlns="http://camel.apache.org/schema/spring">
 
   <templatedRoute routeTemplateRef="prepareReturnMultiple" routeId="direct_prepareReturnArticles">
-    <parameter name="objectType" value="Article"/>
+    <parameter name="objectType" value="Article" />
   </templatedRoute>
 
   <templatedRoute routeTemplateRef="prepareReturnMultiple" routeId="direct_prepareReturnComments">
-    <parameter name="objectType" value="Comment"/>
+    <parameter name="objectType" value="Comment" />
   </templatedRoute>
 
   <templatedRoute routeTemplateRef="returnSingle" routeId="direct_returnArticle">
-    <parameter name="objectType" value="Article"/>
-    <parameter name="returnClass" value="CreateArticle201Response"/>
+    <parameter name="objectType" value="Article" />
+    <parameter name="returnClass" value="CreateArticle201Response" />
   </templatedRoute>
 
   <templatedRoute routeTemplateRef="returnSingle" routeId="direct_returnComment">
-    <parameter name="objectType" value="Comment"/>
-    <parameter name="returnClass" value="CreateArticleComment200Response"/>
+    <parameter name="objectType" value="Comment" />
+    <parameter name="returnClass" value="CreateArticleComment200Response" />
   </templatedRoute>
 
   <templatedRoute routeTemplateRef="returnSingle" routeId="direct_returnUserProfile">
-    <parameter name="objectType" value="UserProfile"/>
-    <parameter name="returnClass" value="GetProfileByUsername200Response"/>
+    <parameter name="objectType" value="UserProfile" />
+    <parameter name="returnClass" value="GetProfileByUsername200Response" />
   </templatedRoute>
 
 </templatedRoutes>

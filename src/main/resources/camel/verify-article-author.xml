@@ -1,6 +1,6 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
   <route id="direct_verifyArticleAuthor" routeConfigurationId="verify-login,generic-error">
-    <from uri="direct:verifyArticleAuthor"/>
+    <from uri="direct:verifyArticleAuthor" />
 
     <filter>
       <simple>${body.author.id} != ${exchangeProperty.loggedInUser.id}</simple>

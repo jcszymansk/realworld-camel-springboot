@@ -2,7 +2,7 @@
   "comment": . | {
     "author": .author | {
       "following": ($headers.__me_follower == 1),
-      * : .
+      * - password, email : .
     },
     "updatedAt": .createdAt,
     * : .

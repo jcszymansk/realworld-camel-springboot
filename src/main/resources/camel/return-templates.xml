@@ -38,7 +38,6 @@
       <unmarshal><json
           library="Jackson"
           unmarshalType="com.github.jacekszymanski.realcamel.model.{{returnClass}}"
-          disableFeatures="FAIL_ON_UNKNOWN_PROPERTIES"
       /></unmarshal>
 
     </route>

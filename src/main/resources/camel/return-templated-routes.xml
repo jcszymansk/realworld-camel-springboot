@@ -28,4 +28,9 @@
     <parameter name="returnClass" value="Login200Response" />
   </templatedRoute>
 
+  <templatedRoute routeTemplateRef="returnSingle" routeId="direct_returnError">
+    <parameter name="objectType" value="Error" />
+    <parameter name="returnClass" value="GenericErrorModel" />
+  </templatedRoute>
+
 </templatedRoutes>

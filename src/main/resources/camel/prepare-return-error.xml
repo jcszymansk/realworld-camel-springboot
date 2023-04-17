@@ -1,0 +1,19 @@
+<route
+    id="direct_prepareReturnError"
+    routeConfigurationId="generic-error"
+    xmlns="http://camel.apache.org/schema/spring">
+
+  <from uri="direct:prepareReturnError" />
+
+  <setHeader name="__exceptionMessages"><groovy>
+    import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.*
+
+    messages(exception(exchange))
+  </groovy></setHeader>
+
+  <!-- avoid validation error in jslt -->
+  <setBody><constant>{}</constant></setBody>
+
+  <!-- and completely meaningless follower check :) -->
+  <setHeader name="__me_follower"><constant>0</constant></setHeader>
+</route>

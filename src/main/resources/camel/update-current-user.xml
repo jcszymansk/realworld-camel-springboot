@@ -18,6 +18,6 @@
 
     <to uri="direct:saveUser" />
 
-    <to uri="direct:loginUser" />
+    <to uri="direct:returnLogin" />
   </route>
 </routes>

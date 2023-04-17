@@ -18,7 +18,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class CreateUserTest extends TestsBase {
 
   public static final String SAVE_ENDPOINT = "direct:saveUser";
-  public static final String LOGIN_ENDPOINT = "direct:loginUser";
+  public static final String LOGIN_ENDPOINT = "direct:returnLogin";
   public static final String ENTRY_ENDPOINT = "direct:createUser";
 
   @Autowired

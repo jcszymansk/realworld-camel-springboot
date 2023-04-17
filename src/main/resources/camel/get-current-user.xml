@@ -8,6 +8,6 @@
       <simple>${exchangeProperty.loggedInUser}</simple>
     </setBody>
 
-    <to uri="direct:loginUser" />
+    <to uri="direct:returnLogin" />
   </route>
 </routes>

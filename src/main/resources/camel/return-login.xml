@@ -1,7 +1,7 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
 
-  <route id="direct_loginUser">
-    <from uri="direct:loginUser" />
+  <route id="direct_returnLogin">
+    <from uri="direct:returnLogin" />
 
     <marshal><json /></marshal>
     <to uri="jsonata:jsonata/create-user-resp.jsonata?inputType=JsonString" />

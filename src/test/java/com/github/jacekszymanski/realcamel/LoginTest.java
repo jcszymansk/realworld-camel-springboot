@@ -20,7 +20,7 @@ import java.util.List;
 public class LoginTest extends TestsBase {
   private static final String JPA_ENDPOINT_PATTERN = "jpa:com.github.jacekszymanski.realcamel.entity.User*";
   private static final String ENTRY_ENDPOINT = "direct:login";
-  private static final String LOGIN_USER_ENDPOINT = "direct:loginUser";
+  private static final String LOGIN_USER_ENDPOINT = "direct:returnLogin";
 
   /***
    * It's an ugly hack, but I can't advice the route more than once, and all crazy things seem to

@@ -18,4 +18,9 @@
     <parameter name="returnClass" value="CreateArticleComment200Response"/>
   </templatedRoute>
 
+  <templatedRoute routeTemplateRef="returnSingle" routeId="direct_returnUserProfile">
+    <parameter name="objectType" value="UserProfile"/>
+    <parameter name="returnClass" value="GetProfileByUsername200Response"/>
+  </templatedRoute>
+
 </templatedRoutes>

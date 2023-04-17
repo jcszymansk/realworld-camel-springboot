@@ -2,6 +2,8 @@
   <route id="direct_returnUserProfile">
     <from uri="direct:returnUserProfile"/>
 
+    <to uri="direct:checkFollow" />
+
     <marshal><json /></marshal>
     <to uri="jsonata:jsonata/get-profile-resp.jsonata?inputType=JsonString" />
 

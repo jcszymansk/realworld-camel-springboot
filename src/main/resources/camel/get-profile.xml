@@ -4,8 +4,6 @@
 
     <to uri="direct:getUserByName" />
 
-    <to uri="direct:checkFollow" />
-
     <to uri="direct:returnUserProfile" />
   </route>
 </routes>

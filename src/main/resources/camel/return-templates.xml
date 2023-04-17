@@ -22,7 +22,7 @@
   <routeTemplate id="returnSingle">
     <templateParameter name="objectType" />
     <templateParameter name="returnClass" />
-    <route routeConfigurationId="generic-error,no-such-object-error"
+    <route routeConfigurationId="generic-error,no-such-object-error,return-cleanup"
            xmlns="http://camel.apache.org/schema/spring">
 
       <from uri="direct:return{{objectType}}" />

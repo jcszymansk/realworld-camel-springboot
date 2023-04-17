@@ -1,5 +1,5 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_updateCurrentUser" routeConfigurationId="verify-login,generic-error">
+  <route id="direct_updateCurrentUser" routeConfigurationId="verify-login,generic-error,return-cleanup">
     <from uri="direct:updateCurrentUser" />
 
     <to uri="direct:convertToMap" />

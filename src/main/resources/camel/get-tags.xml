@@ -1,6 +1,6 @@
 <route
     id="direct_getTags"
-    routeConfigurationId="generic-error"
+    routeConfigurationId="generic-error,return-cleanup"
     xmlns="http://camel.apache.org/schema/spring">
 
   <from uri="direct:getTags" />

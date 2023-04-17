@@ -1,5 +1,5 @@
 <route id="direct_returnArticles"
-  routeConfigurationId="generic-error"
+  routeConfigurationId="generic-error,return-cleanup"
   xmlns="http://camel.apache.org/schema/spring">
 
   <from uri="direct:returnArticles" />

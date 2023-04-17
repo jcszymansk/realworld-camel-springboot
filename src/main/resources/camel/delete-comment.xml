@@ -1,6 +1,6 @@
 <route
     id="direct_deleteArticleComment"
-    routeConfigurationId="verify-login,generic-error,no-such-object-error,return-empty-200"
+    routeConfigurationId="verify-login,generic-error,no-such-object-error,return-empty-200,return-cleanup"
     xmlns="http://camel.apache.org/schema/spring">
 
   <from uri="direct:deleteArticleComment" />

@@ -1,4 +1,4 @@
-<route id="direct_deleteArticle" routeConfigurationId="verify-login,generic-error,no-such-object-error,return-empty-200" xmlns="http://camel.apache.org/schema/spring">
+<route id="direct_deleteArticle" routeConfigurationId="verify-login,generic-error,no-such-object-error,return-empty-200,return-cleanup" xmlns="http://camel.apache.org/schema/spring">
 
   <from uri="direct:deleteArticle" />
 

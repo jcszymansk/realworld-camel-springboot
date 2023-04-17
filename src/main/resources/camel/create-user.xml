@@ -1,5 +1,5 @@
 <routes xmlns="http://camel.apache.org/schema/spring">
-  <route id="direct_createUser" routeConfigurationId="generic-error,return-201">
+  <route id="direct_createUser" routeConfigurationId="generic-error,return-201,return-cleanup">
     <from uri="direct:createUser" />
 
     <marshal><json /></marshal>

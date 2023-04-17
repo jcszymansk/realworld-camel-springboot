@@ -1,0 +1,8 @@
+<routeConfiguration id="return-cleanup">
+  <onCompletion mode="BeforeConsumer">
+    <removeHeaders pattern="^__.*" />
+    <!-- cannot use removeHeaders as patterns are case insensitive there -->
+    <script><groovy>resource:classpath:scripts/remove-lowercase-headers.groovy</groovy></script>
+    <removeProperties pattern="^__.*" />
+  </onCompletion>
+</routeConfiguration>

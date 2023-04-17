@@ -129,7 +129,7 @@
     <dependency>
       <groupId>com.github.jacekszymanski</groupId>
       <artifactId>camel-jwt</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>0.1.0</version>
     </dependency>
 
     <dependency>

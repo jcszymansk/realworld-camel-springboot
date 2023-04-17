@@ -2,32 +2,20 @@
   <route id="direct:returnError" routeConfigurationId="return-cleanup">
     <from uri="direct:returnError" />
 
-    <setBody>
-      <constant><![CDATA[
-          {"errors": {"body": [ ]}}
-        ]]></constant>
-    </setBody>
+    <setHeader name="__exceptionMessages"><groovy>
+        import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.*
+
+        messages(exception(exchange))
+    </groovy></setHeader>
+
+    <!-- avoid validation error in jslt -->
+    <setBody><constant>{}</constant></setBody>
+
+    <to uri="jslt:classpath:jslt/error-resp.jslt" />
 
     <unmarshal>
       <json unmarshalType="com.github.jacekszymanski.realcamel.model.GenericErrorModel" />
     </unmarshal>
-
-    <script>
-      <groovy>
-        <![CDATA[
-            import static com.github.jacekszymanski.realcamel.util.ExceptionUtil.*
-
-            String msg = exchange.properties.'ownErrorMessage'
-            def errList = request.body.errors.body
-
-            if (msg != null) {
-              errList.add(msg)
-            }
-
-            errList.addAll(messages(exception(exchange)))
-          ]]>
-      </groovy>
-    </script>
 
     <stop />
 

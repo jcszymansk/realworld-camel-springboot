@@ -6,9 +6,9 @@
       <exception>org.jose4j.jwt.consumer.InvalidJwtSignatureException</exception>
       <handled><constant>true</constant></handled>
 
-      <setProperty name="ownErrorMessage">
+      <setHeader name="__ownErrorMessage">
         <constant>wrong authentication data</constant>
-      </setProperty>
+      </setHeader>
       <setHeader name="CamelHttpResponseCode">
         <constant resultType="java.lang.Integer">401</constant>
       </setHeader>

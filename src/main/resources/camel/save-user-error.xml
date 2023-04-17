@@ -4,9 +4,9 @@
       <exception>org.hibernate.exception.ConstraintViolationException</exception>
       <handled><constant>true</constant></handled>
 
-      <setProperty name="ownErrorMessage">
+      <setHeader name="__ownErrorMessage">
         <constant>user or email already taken</constant>
-      </setProperty>
+      </setHeader>
       <setHeader name="CamelHttpResponseCode">
         <constant resultType="java.lang.Integer">422</constant>
       </setHeader>

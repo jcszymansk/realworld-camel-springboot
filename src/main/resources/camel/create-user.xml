@@ -10,6 +10,6 @@
     <to uri="direct:saveUser" />
     <log message="created ${body}" loggingLevel="DEBUG" />
 
-    <to uri="direct:returnLogin" />
+    <to uri="direct:returnUser" />
   </route>
 </routes>

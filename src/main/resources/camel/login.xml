@@ -30,6 +30,6 @@
       <simple>${body[0]}</simple>
     </setBody>
 
-    <to uri="direct:returnLogin" />
+    <to uri="direct:returnUser" />
   </route>
 </routes>

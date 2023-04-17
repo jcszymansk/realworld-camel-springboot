@@ -7,10 +7,24 @@ def sort(array)
       $array[0],
       sort([for ($array[1:]) . if (. >= $array[0])])])
 
+def createslug(title, id)
+  let preptitle =
+    replace(
+      replace(
+        trim($title),
+        "\\s+",
+        "-"),
+      "[^a-zA-Z0-9-]",
+      "")
+  if (size($preptitle) == 0)
+    string($id)
+  else
+    join([$preptitle, string(.id)], "-")
+
 {
   "article" : . | {
     "tagList" : sort([for (.tagList) .tag]),
-    "slug": string(.id),
+    "slug": createslug(.title, .id),
     "favoritesCount": $headers.__favorites.FAVORITES,
     "favorited": ($headers.__favorites.MYFAVORITE == 1),
     "author": .author | {

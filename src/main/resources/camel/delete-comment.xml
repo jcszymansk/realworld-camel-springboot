@@ -1,6 +1,6 @@
 <route
     id="direct_deleteArticleComment"
-    routeConfigurationId="verify-login,generic-error,no-such-object-error"
+    routeConfigurationId="verify-login,generic-error,no-such-object-error,return-empty-200"
     xmlns="http://camel.apache.org/schema/spring">
 
   <from uri="direct:deleteArticleComment"/>
@@ -22,9 +22,5 @@
   <log message="Deleting comment: ${body.id}" />
 
   <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Comment?remove=true" />
-
-  <setBody>
-    <groovy>[:]</groovy>
-  </setBody>
 
 </route>

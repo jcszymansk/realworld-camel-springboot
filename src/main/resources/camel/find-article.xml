@@ -4,10 +4,20 @@
 
   <from uri="direct:findArticle" />
 
-  <setBody>
+  <setProperty name="__article_id">
     <groovy resultType="java.lang.Long">resource:classpath:scripts/resolve-slug.groovy</groovy>
-  </setBody>
+  </setProperty>
 
-  <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?findEntity=true&amp;outputType=SelectOne" />
+  <setHeader name="CamelJpaParameters">
+    <groovy>
+      [ id: exchange.properties.__article_id ]
+    </groovy>
+  </setHeader>
+
+  <to uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a where a.id = :id
+      &amp;outputType=SelectOne" />
+
+  <removeProperty name="__article_id" />
+  <removeHeader name="CamelJpaParameters" />
 
 </route>

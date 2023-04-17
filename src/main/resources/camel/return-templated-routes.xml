@@ -23,4 +23,9 @@
     <parameter name="returnClass" value="GetProfileByUsername200Response" />
   </templatedRoute>
 
+  <templatedRoute routeTemplateRef="returnSingle" routeId="direct_returnUser">
+    <parameter name="objectType" value="User" />
+    <parameter name="returnClass" value="Login200Response" />
+  </templatedRoute>
+
 </templatedRoutes>

@@ -2,24 +2,21 @@ def sort(array)
   if (size($array) <= 1)
     $array
   else
-    flatten([
-      sort([for ($array[1:]) . if (. < $array[0])]),
+    [
+      [for ($array[1:]) . if (. < $array[0])] | sort(.),
       $array[0],
-      sort([for ($array[1:]) . if (. >= $array[0])])])
+      [for ($array[1:]) . if (. >= $array[0])] | sort(.)
+    ] | flatten(.)
 
 def createslug(title, id)
-  let preptitle =
-    replace(
-      replace(
-        trim($title),
-        "\\s+",
-        "-"),
-      "[^a-zA-Z0-9-]",
-      "")
+  let preptitle = $title
+    | trim(.)
+    | replace(., "\\s+", "-")
+    | replace(., "[^a-zA-Z0-9-]", "")
   if (size($preptitle) == 0)
     string($id)
   else
-    join([$preptitle, string(.id)], "-")
+    [$preptitle, string(.id)] | join(., "-")
 
 {
   "article" : . | {

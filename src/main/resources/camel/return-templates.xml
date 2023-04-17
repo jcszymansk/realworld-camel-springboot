@@ -27,9 +27,9 @@
 
       <from uri="direct:return{{objectType}}" />
 
-      <to uri="direct:checkFollow" />
+      <to uri="direct:prepareReturn{{objectType}}?failIfNoConsumers=false&amp;block=false" />
 
-      <to uri="direct:get{{objectType}}Likes?failIfNoConsumers=false&amp;block=false" />
+      <to uri="direct:checkFollow" />
 
       <marshal><json /></marshal>
       <toD uri="language:groovy:&quot;jslt:classpath:jslt/${'{{objectType}}'.toLowerCase()}-resp.jslt&quot;" />

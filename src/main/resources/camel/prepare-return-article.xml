@@ -1,8 +1,8 @@
 <route
-    id="direct_getArticleLikes"
+    id="direct_prepareReturnArticle"
     routeConfigurationId="generic-error"
     xmlns="http://camel.apache.org/schema/spring">
-  <from uri="direct:getArticleLikes" />
+  <from uri="direct:prepareReturnArticle" />
 
   <setProperty name="articleIds">
     <groovy>[request.body.id]</groovy>

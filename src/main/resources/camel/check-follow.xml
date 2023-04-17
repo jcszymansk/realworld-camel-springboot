@@ -1,0 +1,16 @@
+<route
+    id="direct_checkFollow"
+    routeConfigurationId="generic-error"
+    xmlns="http://camel.apache.org/schema/spring">
+
+  <from uri="direct:checkFollow" />
+
+  <filter>
+    <!-- it may be already set, and the check (database select) may be quite expensive -->
+    <simple>${header.__me_follower} == null</simple>
+
+    <setProperty name="__checkFollow"><simple>${body}</simple></setProperty>
+    <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
+  </filter>
+
+</route>

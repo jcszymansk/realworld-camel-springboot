@@ -4,8 +4,7 @@
 
     <to uri="direct:getUserByName" />
 
-    <setProperty name="__checkFollow"><simple>${body}</simple></setProperty>
-    <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
+    <to uri="direct:checkFollow" />
 
     <to uri="direct:returnUserProfile" />
   </route>

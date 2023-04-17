@@ -27,8 +27,7 @@
 
       <from uri="direct:return{{objectType}}" />
 
-      <setProperty name="__checkFollow"><simple>${body.author}</simple></setProperty>
-      <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
+      <to uri="direct:checkFollow" />
 
       <to uri="direct:get{{objectType}}Likes?failIfNoConsumers=false&amp;block=false" />
 

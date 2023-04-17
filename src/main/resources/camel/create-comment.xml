@@ -3,15 +3,12 @@
        routeConfigurationId="verify-login,generic-error">
   <from uri="direct:createArticleComment" />
 
-  <setProperty name="__comment"><simple>${body}</simple></setProperty>
-
-  <!-- TODO this is evil, need to store the article right away in the property without touching body -->
+  <setProperty name="__xjpa_opts"><constant>&amp;outputTarget=.__article</constant></setProperty>
   <to uri="direct:findArticle" />
-  <setProperty name="__article"><simple>${body}</simple></setProperty>
 
   <setBody><groovy>
     com.github.jacekszymanski.realcamel.entity.Comment.builder()
-      .body(exchange.properties.__comment.comment.body)
+      .body(request.body.comment.body)
       .author(exchange.properties.loggedInUser)
       .article(exchange.properties.__article)
       .build()

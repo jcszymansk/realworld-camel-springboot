@@ -3,7 +3,7 @@
     <from uri="direct:createUser" />
 
     <marshal><json /></marshal>
-    <to uri="jsonata:jsonata/create-user-req2db.jsonata?inputType=JsonString" />
+    <to uri="jslt:classpath:jslt/create-user-req2db.jslt" />
 
     <unmarshal><json library="Jackson" unmarshalType="com.github.jacekszymanski.realcamel.entity.User" /></unmarshal>
 

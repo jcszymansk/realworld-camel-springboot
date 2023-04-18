@@ -3,6 +3,7 @@ package com.github.jacekszymanski.realcamel.testutil;
 import com.github.jacekszymanski.realcamel.entity.User;
 import com.github.jacekszymanski.realcamel.model.CreateUserRequest;
 import com.github.jacekszymanski.realcamel.model.NewUser;
+import org.apache.commons.codec.digest.DigestUtils;
 
 public class UserUtil {
   public static final String DEFAULT_EMAIL = "abcde@abcde.com";
@@ -26,7 +27,7 @@ public class UserUtil {
     final User user = new User();
 
     user.setEmail(DEFAULT_EMAIL);
-    user.setPassword(DEFAULT_PASSWORD);
+    user.setPassword(DigestUtils.sha256Hex(DEFAULT_PASSWORD));
     user.setUsername(DEFAULT_USERNAME);
 
     return user;

@@ -15,12 +15,14 @@
       -->
     <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByEmail&amp;parameters.email=${exchangeProperty.user['email']}" />
 
-    <log message="selected ${body} size ${body.size}" loggingLevel="DEBUG" />
+    <log message="selected ${body} size ${body.size} login data ${exchangeProperty.user}" loggingLevel="DEBUG" />
 
     <filter>
-      <simple><![CDATA[
-        ${body.size} == 0 || ${body[0].password} != ${exchangeProperty.user['password']}
-      ]]></simple>
+      <groovy><![CDATA[
+        import org.apache.commons.codec.digest.DigestUtils
+
+        body.size() == 0 || !body[0].password.equals(DigestUtils.sha256Hex(exchange.properties.user['password']))
+      ]]></groovy>
 
       <throwException message="Bad login" exceptionType="com.github.jacekszymanski.realcamel.UnauthorizedException" />
 

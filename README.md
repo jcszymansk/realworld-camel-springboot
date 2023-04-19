@@ -30,8 +30,9 @@ formats/languages:
 - `camel-jackson`
 - `camel-jpa`
 - `camel-jslt`
-- `camel-jsonata`
 - `camel-sql`
+
+(there used to be `camel-jsonata` as well, but it was replaced by `camel-jslt`)
 
 Also, I've created two custom Camel components to use in this demo:
 - `camel-jwt`

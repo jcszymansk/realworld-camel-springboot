@@ -17,6 +17,11 @@ public class RestConfiguration extends RouteBuilder {
             .component("servlet")
             .bindingMode(RestBindingMode.auto)
                 .dataFormatProperty("json.out.disableFeatures", "WRITE_DATES_AS_TIMESTAMPS")
-            .clientRequestValidation(true);
+            .clientRequestValidation(true)
+            .enableCORS(true)
+            .corsHeaderProperty("Access-Control-Allow-Headers",
+                "Origin, Accept, Authorization, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers")
+            .corsHeaderProperty("Access-Control-Allow-Credentials", "true")
+        ;
     }
 }

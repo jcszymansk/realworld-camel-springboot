@@ -211,9 +211,30 @@
               <generatorName>java-camel</generatorName>
               <configOptions>
                 <sourceFolder>src/gen/java</sourceFolder>
-                <camelRestClientRequestValidation>true</camelRestClientRequestValidation>
-                <camelDataformatProperties>json.out.disableFeatures=WRITE_DATES_AS_TIMESTAMPS</camelDataformatProperties>
               </configOptions>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+
+      <!-- remove generated rest config -->
+      <plugin>
+        <artifactId>maven-clean-plugin</artifactId>
+        <version>3.2.0</version>
+        <executions>
+          <execution>
+            <id>auto-clean</id>
+            <phase>process-sources</phase>
+            <goals>
+              <goal>clean</goal>
+            </goals>
+            <configuration>
+              <excludeDefaultDirectories>true</excludeDefaultDirectories>
+              <filesets>
+                <fileset>
+                  <directory>target/generated-sources/openapi/src/gen/java/org</directory>
+                </fileset>
+              </filesets>
             </configuration>
           </execution>
         </executions>

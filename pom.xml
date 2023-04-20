@@ -11,7 +11,7 @@
   </parent>
 
   <groupId>com.github.jacekszymanski</groupId>
-  <artifactId>realcamel</artifactId>
+  <artifactId>realworld-camel-springboot</artifactId>
   <version>0.0.1</version>
 
   <properties>

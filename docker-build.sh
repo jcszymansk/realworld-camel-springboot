@@ -1,6 +1,6 @@
 #!/bin/sh
 
-: "${PROJECT_NAME:=jacekszymanski/realworld-camel-springboot}"
+: "${PROJECT_NAME:=jszymanski/realworld-camel-springboot}"
 : "${PROJECT_VERSION:=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)}"
 : "${LATEST:=true}"
 : "${IMAGE_TAGS:=${PROJECT_VERSION} $(if ${LATEST}; then echo latest; fi)}"

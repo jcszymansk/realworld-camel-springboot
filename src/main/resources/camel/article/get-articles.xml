@@ -7,6 +7,7 @@
   <setProperty name="__jpa_query">
     <groovy>resource:classpath:scripts/article-feed-query.groovy</groovy>
   </setProperty>
+  <script><groovy>resource:classpath:scripts/limit-offset.groovy</groovy></script>
 
   <log message="Querying for articles: ${exchangeProperty.__jpa_query} with params ${headers.CamelJpaParameters}" />
 

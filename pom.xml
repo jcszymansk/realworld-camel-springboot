@@ -207,7 +207,7 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <inputSpec>${project.basedir}/src/main/resources/realworld.yml</inputSpec>
+              <inputSpec>${project.basedir}/api/realworld.yml</inputSpec>
               <generatorName>java-camel</generatorName>
               <configOptions>
                 <sourceFolder>src/gen/java</sourceFolder>

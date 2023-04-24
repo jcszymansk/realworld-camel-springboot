@@ -17,7 +17,7 @@ camel:
 spring:
 
   datasource:
-    url: jdbc:h2:file:./target/conduit.h2;AUTO_SERVER=TRUE
+    url: jdbc:h2:file:./data/conduit.h2;AUTO_SERVER=TRUE
 
   jpa:
     database: h2

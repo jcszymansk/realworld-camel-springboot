@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
@@ -30,6 +31,7 @@ import java.util.Date;
 public class Comment extends Base {
 
   @Column(nullable = false)
+  @Lob
   private String body;
 
   @ManyToOne(fetch = FetchType.EAGER)

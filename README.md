@@ -32,7 +32,7 @@ formats/languages:
 - `camel-jslt`
 - `camel-sql`
 
-(there used to be `camel-jsonata` as well, but it was replaced by `camel-jslt`)
+(there used to be `camel-jsonata` as well, but it was completely replaced by `camel-jslt`)
 
 Also, I've created two custom Camel components to use in this demo:
 - `camel-jwt`
@@ -62,7 +62,7 @@ This component is embedded in this project, in the
 
 To run this example you need to have Java 11 and Maven installed. 
 
-You need also to create a JWT secret. On Mac/Linux you should be able
+You need also to create a JWT HS256 secret. On Mac/Linux you should be able
 to to this using the `mkkey.sh` script in the `src/main/resources`
 directory.
 
@@ -70,6 +70,27 @@ Once you have your key, simply run:
 ```
 mvn spring-boot:run
 ```
+
+### Frontend
+This project is a backend only. To see it in action, you need to run a frontend as well.
+Choose one from [here](https://codebase.show/projects/realworld?category=frontend), install
+it and point to the backend at [http://localhost:8080/api/](http://localhost:8080/api/).
+
+### ...or just use the Docker image:
+```
+docker pull jszymanski/realworld-camel-springboot
+
+```
+
+and access from the browser at http://localhost:8080/
+
+It is configured to use the test key, so you can run the test curl commands right away.
+
+The Docker image uses [this frontend](https://github.com/mits-gossau/event-driven-web-components-realworld-example-app).
+I am not the author of this frontend, and use it unchanged. Any errors you'll see are probably
+my fault, not the author's. :-)
+
+### Tests
 
 This projects has also several (could be more...) tests. To run them,
 issue the following command:
@@ -87,3 +108,16 @@ To change the JPA implementation used, add it to the `pom.xml` file
 instead of the Hibernate dependency. Also, you probably need to update
 the `application.yml` file. To change the database, change the dependency
 in the `pom.xml` file and update the `application.yml` file as well.
+
+# What's next
+
+The spec is completely implemented, though it probably contains a fair share of bugs,
+I will definitely be fixing them when found.
+
+To showcase asynchronous Camel components, some additional features could be added, like
+a cron job sending usage statistics or something similar. I will look into this. OTOH,
+features like confirmation emails on account creation or password reset are unsupported
+by the existing frontends, so there's no point in implementing them until the spec is
+updated.
+
+Some time after Camel 4.0 is released, I will also update this project to use it.

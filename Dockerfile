@@ -1,5 +1,7 @@
 FROM nginx:1.23.4-alpine-slim
 
+ARG JAR_FILE
+
 # prepare nginx
 EXPOSE 80
 RUN rm /etc/nginx/conf.d/default.conf
@@ -28,8 +30,10 @@ RUN sed -i -Ee 's,https://conduit.productionready.io/api,/api,g' src/es/helpers/
 # put backend - before building run "mvn package" in the project root
 RUN mkdir /app
 WORKDIR /app
-COPY target/realcamel-*.jar /app/app.jar
+COPY ${JAR_FILE} /app/app.jar
 COPY src/test/resources/jwt.key.txt /app/etc/jwt.key.txt
+COPY etc/conduit.h2.mv.db.gz /app/data/conduit.h2.mv.db.gz
+RUN gunzip /app/data/conduit.h2.mv.db.gz
 
 ENV CLASSPATH=/app/app.jar:/app/etc
 

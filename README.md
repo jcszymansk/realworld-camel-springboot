@@ -79,7 +79,8 @@ it and point to the backend at [http://localhost:8080/api/](http://localhost:808
 ### ...or just use the Docker image:
 ```
 docker pull jszymanski/realworld-camel-springboot
-
+docker container create -t --name realworld-camel-springboot -p 127.0.0.1:8080:80 jszymanski/realworld-camel-springboot
+docker container start -a realworld-camel-springboot
 ```
 
 and access from the browser at http://localhost:8080/
@@ -111,7 +112,7 @@ in the `pom.xml` file and update the `application.yml` file as well.
 
 # What's next
 
-The spec is completely implemented, though it probably contains a fair share of bugs,
+The implementation is complete with the spec, though it probably contains a fair share of bugs,
 I will definitely be fixing them when found.
 
 To showcase asynchronous Camel components, some additional features could be added, like
@@ -121,3 +122,12 @@ by the existing frontends, so there's no point in implementing them until the sp
 updated.
 
 Some time after Camel 4.0 is released, I will also update this project to use it.
+
+Possibly rewrite datagrabber in Java or even Camel so it is possible to preserve
+created/updated timestamps on articles and comments. (Now it uses the API which does
+not allow to set these fields.)
+
+The Docker image creation is lame, I should properly do two or even three images and
+docker-compose them together.
+
+And certainly much more...

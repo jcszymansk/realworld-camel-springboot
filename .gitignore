@@ -140,3 +140,4 @@ target/
 .factorypath
 .project
 src/main/resources/jwt.key.txt
+data/

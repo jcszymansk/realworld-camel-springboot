@@ -19,6 +19,8 @@
 
   <to uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?usePersist=true" />
 
+  <log message="created ${body}" loggingLevel="DEBUG" />
+
   <to uri="direct:returnArticle" />
 
 </route>

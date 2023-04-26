@@ -9,6 +9,7 @@ public class UserUtil {
   public static final String DEFAULT_EMAIL = "abcde@abcde.com";
   public static final String DEFAULT_PASSWORD = "password";
   public static final String DEFAULT_USERNAME = "abcde";
+  public static final String DEFAULT_IMAGE = "https://static.productionready.io/images/smiley-cyrus.jpg";
 
   public static CreateUserRequest defaultUserRequest() {
     final NewUser newUser = new NewUser();
@@ -29,6 +30,7 @@ public class UserUtil {
     user.setEmail(DEFAULT_EMAIL);
     user.setPassword(DigestUtils.sha256Hex(DEFAULT_PASSWORD));
     user.setUsername(DEFAULT_USERNAME);
+    user.setImage(DEFAULT_IMAGE);
 
     return user;
   }

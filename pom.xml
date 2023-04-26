@@ -12,7 +12,7 @@
 
   <groupId>com.github.jacekszymanski</groupId>
   <artifactId>realworld-camel-springboot</artifactId>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
 
   <properties>
     <java.version>11</java.version>
@@ -125,7 +125,7 @@
     <dependency>
       <groupId>com.github.jacekszymanski</groupId>
       <artifactId>camel-jwt</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.1</version>
     </dependency>
 
     <dependency>

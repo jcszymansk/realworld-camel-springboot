@@ -131,6 +131,8 @@ much, look into correcting this.
 Limit title/description length (which would affect the imported data, as the titles are
 often very long there).
 
+Use Spring Security for authentication and route policies.
+
 The Docker image creation is lame, I should properly do two or even three images and
 docker-compose them together.
 

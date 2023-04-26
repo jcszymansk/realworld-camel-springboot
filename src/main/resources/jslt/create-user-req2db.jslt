@@ -1,4 +1,5 @@
 .user | {
   "password": sha256-hex(.password),
+  "image": "https://static.productionready.io/images/smiley-cyrus.jpg",
   *: .
 }

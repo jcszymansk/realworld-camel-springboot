@@ -125,7 +125,11 @@ Some time after Camel 4.0 is released, I will also update this project to use it
 
 Possibly rewrite datagrabber in Java or even Camel so it is possible to preserve
 created/updated timestamps on articles and comments. (Now it uses the API which does
-not allow to set these fields.)
+not allow to set these fields.) In the pulled data, line breaks are sometimes quoted too
+much, look into correcting this.
+
+Limit title/description length (which would affect the imported data, as the titles are
+often very long there).
 
 The Docker image creation is lame, I should properly do two or even three images and
 docker-compose them together.

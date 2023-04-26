@@ -14,4 +14,4 @@ fi
 
 echo "Building image ${PROJECT_NAME} with tags ${IMAGE_TAGS}"
 # shellcheck disable=SC2086
-docker build ${TAG_OPTS} --build-arg JAR_FILE=${PACKAGE_FILE} .
+docker build ${TAG_OPTS} --build-arg JAR_FILE="${PACKAGE_FILE}" .

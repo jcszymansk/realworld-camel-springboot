@@ -79,7 +79,7 @@ it and point to the backend at [http://localhost:8080/api/](http://localhost:808
 ### ...or just use the Docker image:
 ```
 docker pull jszymanski/realworld-camel-springboot
-docker container create -t --name realworld-camel-springboot -p 127.0.0.1:8080:80 jszymanski/realworld-camel-springboot
+docker container create -t --name realworld-camel-springboot -p 127.0.0.1:8080:80 jszymanski/realworld-camel-springboot:latest
 docker container start -a realworld-camel-springboot
 ```
 

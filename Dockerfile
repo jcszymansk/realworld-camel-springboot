@@ -1,4 +1,4 @@
-FROM nginx:1.23.4-alpine-slim
+FROM nginx:1-alpine-slim
 
 LABEL maintainer="Jacek Szymański <jacek.p.szymanski@gmail.com>"
 

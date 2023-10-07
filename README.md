@@ -36,7 +36,7 @@ formats/languages:
 
 Also, I've created two custom Camel components to use in this demo:
 - `camel-jwt`
-- `camel-xjpa`
+- `camel-xjpa` (removed)
 
 ### `camel-jwt` 
 is a simple component that allows to sign and verify JWT tokens,
@@ -57,6 +57,14 @@ into the message body.
 
 This component is embedded in this project, in the 
 `com.github.jacekszymanski.camel.xjpa` package.
+
+#### Update 2023-10-08 (commit a71279be)
+
+With the release of Camel 3.21.0 the `camel-xjpa` component is no longer needed, as
+all the features it provided were added to the standard `camel-jpa` component.
+
+Accordingly, the project now uses the `camel-jpa` component instead of `camel-xjpa`
+and the `camel-xjpa` component has been removed from the project.
 
 # How to run
 

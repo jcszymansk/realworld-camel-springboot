@@ -11,7 +11,7 @@
 
   <log message="Querying for articles: ${exchangeProperty.__jpa_query} with params ${headers.CamelJpaParameters}" />
 
-  <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a ${exchangeProperty.__jpa_query}
+  <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a ${exchangeProperty.__jpa_query}
     order by a.updatedAt desc" />
 
   <log message="Found ${body.size} articles" />

@@ -12,11 +12,12 @@
     ]]></groovy>
   </setHeader>
 
+  <!-- FIXME refactor with get-articles, or get rid of the property and put the query in the toD -->
   <setProperty name="__jpa_query">
     <constant>from Article a, Follow f where a.author.id = f.followed.id and f.follower.id = :userid</constant>
   </setProperty>
 
-  <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a ${exchangeProperty.__jpa_query}
+  <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a ${exchangeProperty.__jpa_query}
       order by a.updatedAt desc" />
 
   <log message="Found ${body.size} articles" />

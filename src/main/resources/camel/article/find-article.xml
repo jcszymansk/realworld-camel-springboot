@@ -14,8 +14,9 @@
     </groovy>
   </setHeader>
 
-  <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a where a.id = :id
-      &amp;outputType=SelectOne${exchangeProperty.__xjpa_opts}" />
+  <!-- don't put &amp; before ${exchangeProperty.__xjpa_opts}, it's either empty or starts with it -->
+  <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a where a.id = :id
+      &amp;singleResult=true${exchangeProperty.__xjpa_opts}" />
 
   <removeProperty name="__article_id" />
   <removeProperty name="__xjpa_opts" />

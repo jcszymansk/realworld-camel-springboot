@@ -7,8 +7,8 @@
     ]]></simple>
       <removeHeaders pattern="CamelXJpa*" />
 
-      <toD uri="xjpa:com.github.jacekszymanski.realcamel.entity.Article?query=select count(a) ${exchangeProperty.__jpa_query}
-        &amp;outputType=SelectOne&amp;outputTarget=.__articlesCount" />
+      <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select count(a) ${exchangeProperty.__jpa_query}
+        &amp;singleResult=true&amp;outputTarget=property:__articlesCount" />
     </when>
     <otherwise>
       <setProperty name="__articlesCount">

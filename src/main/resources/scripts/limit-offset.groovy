@@ -17,5 +17,5 @@ def offset(offset) {
   }
 }
 // limit and offset
-request.headers['CamelXJpaMaximumResults'] = limit(request.headers.limit)
-request.headers['CamelXJpaFirstResult'] = offset(request.headers.offset)
+request.headers['CamelJpaMaximumResults'] = limit(request.headers.limit)
+request.headers['CamelJpaFirstResult'] = offset(request.headers.offset)

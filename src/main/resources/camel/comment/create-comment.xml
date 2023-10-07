@@ -3,7 +3,7 @@
        routeConfigurationId="verify-login,generic-error">
   <from uri="direct:createArticleComment" />
 
-  <setProperty name="__xjpa_opts"><constant>&amp;outputTarget=.__article</constant></setProperty>
+  <setProperty name="__xjpa_opts"><constant>&amp;outputTarget=property:__article</constant></setProperty>
   <to uri="direct:findArticle" />
 
   <setBody><groovy>

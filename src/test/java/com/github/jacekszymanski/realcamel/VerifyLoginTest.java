@@ -18,7 +18,7 @@ import javax.persistence.NonUniqueResultException;
 @SpringBootTest(classes = CamelApplication.class)
 public class VerifyLoginTest extends TestsBase {
 
-  private static final String JPA_ENDPOINT_PATTERN = "xjpa:com.github.jacekszymanski.realcamel.entity.User*";
+  private static final String JPA_ENDPOINT_PATTERN = "jpa:com.github.jacekszymanski.realcamel.entity.User*";
   private static final String ENTRY_ENDPOINT = "direct:verifyLogin";
   private static final String TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhYmNkZSJ9.iFBORfKYZ5YTir5cMVYMjEZ8sveV-Vg-lW6SShWkCLI";
 

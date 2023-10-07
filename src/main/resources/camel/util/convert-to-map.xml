@@ -1,4 +1,4 @@
-<route xmlns="http://camel.apache.org/schema/spring">
+<route id="direct_convertToMap" routeConfigurationId="generic-error" xmlns="http://camel.apache.org/schema/spring">
   <from uri="direct:convertToMap" />
 
   <marshal><json library="Jackson" /></marshal>

@@ -16,8 +16,8 @@ import jakarta.persistence.MappedSuperclass;
 public class Base {
 
   @Id
-  @GeneratedValue
-  @SequenceGenerator(sequenceName = "hibernate_sequence", name = "hibernate_sequence")
+  @GeneratedValue(generator = "hibernate_sequence")
+  @SequenceGenerator(sequenceName = "hibernate_sequence", name = "hibernate_sequence", allocationSize = 1)
   private Long id;
 
 }

@@ -66,12 +66,20 @@ all the features it provided were added to the standard `camel-jpa` component.
 Accordingly, the project now uses the `camel-jpa` component instead of `camel-xjpa`
 and the `camel-xjpa` component has been removed from the project.
 
+#### Update 2024-03-10
+
+The project has been updated to use Camel 4.4.0. Accordingly, it now requires Java 17.
+H2 database format has changed, the database file needs to be recreated, or updated (e.g. using `etc/migratedb.sh`
+script), otherwise the application won't start. No automatic database upgrade is provided.
+
+As of now, camel variables are not used. This will be fixed in the next update, hopefully in a few days.
+
 # How to run
 
-To run this example you need to have Java 11 and Maven installed. 
+To run this example you need to have Java 17 and Maven installed.
 
 You need also to create a JWT HS256 secret. On Mac/Linux you should be able
-to to this using the `mkkey.sh` script in the `src/main/resources`
+to do this using the `mkkey.sh` script in the `src/main/resources`
 directory.
 
 Once you have your key, simply run:
@@ -128,8 +136,6 @@ a cron job sending usage statistics or something similar. I will look into this.
 features like confirmation emails on account creation or password reset are unsupported
 by the existing frontends, so there's no point in implementing them until the spec is
 updated.
-
-Some time after Camel 4.0 is released, I will also update this project to use it.
 
 Possibly rewrite datagrabber in Java or even Camel so it is possible to preserve
 created/updated timestamps on articles and comments. (Now it uses the API which does

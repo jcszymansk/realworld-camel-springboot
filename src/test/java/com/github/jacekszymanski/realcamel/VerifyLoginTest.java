@@ -12,7 +12,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.persistence.NonUniqueResultException;
+import jakarta.persistence.NonUniqueResultException;
 
 @CamelSpringBootTest
 @SpringBootTest(classes = CamelApplication.class)

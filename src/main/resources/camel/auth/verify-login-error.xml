@@ -1,7 +1,7 @@
 <routeConfigurations>
   <routeConfiguration id="verify-login-error">
     <onException>
-      <exception>javax.persistence.NonUniqueResultException</exception>
+      <exception>jakarta.persistence.NonUniqueResultException</exception>
       <exception>org.jose4j.jwt.consumer.InvalidJwtException</exception>
       <exception>org.jose4j.jwt.consumer.InvalidJwtSignatureException</exception>
       <handled><constant>true</constant></handled>

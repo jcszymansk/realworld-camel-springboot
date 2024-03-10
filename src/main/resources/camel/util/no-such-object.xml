@@ -1,7 +1,7 @@
 <routeConfigurations>
   <routeConfiguration id="no-such-object-error">
     <onException>
-      <exception>javax.persistence.NonUniqueResultException</exception>
+      <exception>jakarta.persistence.NonUniqueResultException</exception>
       <handled><constant>true</constant></handled>
 
       <setHeader name="__ownErrorMessage">

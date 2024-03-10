@@ -5,16 +5,16 @@
 
   <groupId>com.github.jacekszymanski</groupId>
   <artifactId>realworld-camel-springboot</artifactId>
-  <version>0.1.2</version>
+  <version>0.2.0</version>
 
   <properties>
-    <java.version>11</java.version>
+    <java.version>17</java.version>
     <openapi.generator.maven.plugin.apiPackage>com.github.jacekszymanski.realcamel.api</openapi.generator.maven.plugin.apiPackage>
     <openapi.generator.maven.plugin.modelPackage>com.github.jacekszymanski.realcamel.model</openapi.generator.maven.plugin.modelPackage>
     <log4j2.version>2.22.1</log4j2.version>
-    <camel.version>3.22.1</camel.version>
-    <spring-boot.version>2.7.18</spring-boot.version>
-    <camel-jwt.version>0.1.3</camel-jwt.version>
+    <camel.version>4.4.0</camel.version>
+    <spring-boot.version>3.2.2</spring-boot.version>
+    <camel-jwt.version>0.2.0</camel-jwt.version>
   </properties>
 
   <dependencyManagement>
@@ -167,9 +167,9 @@
     </dependency>
 
     <dependency>
-      <groupId>javax.validation</groupId>
-      <artifactId>validation-api</artifactId>
-      <version>2.0.1.Final</version>
+      <groupId>jakarta.validation</groupId>
+      <artifactId>jakarta.validation-api</artifactId>
+      <version>3.0.2</version>
     </dependency>
 
     <dependency>
@@ -208,6 +208,7 @@
               <generatorName>java-camel</generatorName>
               <configOptions>
                 <sourceFolder>src/gen/java</sourceFolder>
+                <useJakartaEe>true</useJakartaEe>
               </configOptions>
             </configuration>
           </execution>
@@ -235,6 +236,14 @@
             </configuration>
           </execution>
         </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>8</source>
+          <target>8</target>
+        </configuration>
       </plugin>
 
     </plugins>

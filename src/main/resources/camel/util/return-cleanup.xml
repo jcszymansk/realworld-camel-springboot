@@ -1,4 +1,5 @@
 <routeConfiguration id="return-cleanup">
+  <!-- TODO should not be needed after variables are used instead of headers/properties -->
   <onCompletion mode="BeforeConsumer">
     <removeHeaders pattern="^__.*" />
     <!-- cannot use removeHeaders as patterns are case insensitive there -->

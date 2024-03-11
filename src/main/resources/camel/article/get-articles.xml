@@ -4,14 +4,14 @@
 
   <from uri="direct:getArticles" />
 
-  <setProperty name="__jpa_query">
+  <setVariable name="__jpa_query">
     <groovy>resource:classpath:scripts/article-feed-query.groovy</groovy>
-  </setProperty>
+  </setVariable>
   <script><groovy>resource:classpath:scripts/limit-offset.groovy</groovy></script>
 
   <log message="Querying for articles: ${exchangeProperty.__jpa_query} with params ${headers.CamelJpaParameters}" />
 
-  <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a ${exchangeProperty.__jpa_query}
+  <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a ${variable.__jpa_query}
     order by a.updatedAt desc" />
 
   <log message="Found ${body.size} articles" />

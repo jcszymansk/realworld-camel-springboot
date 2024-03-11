@@ -3,7 +3,7 @@
     <from uri="direct:verifyArticleAuthor" />
 
     <filter>
-      <simple>${body.author.id} != ${exchangeProperty.loggedInUser.id}</simple>
+      <simple>${body.author.id} != ${variable.loggedInUser.id}</simple>
       <throwException message="You are not the author of this article"
                       exceptionType="com.github.jacekszymanski.realcamel.RouteException" />
     </filter>

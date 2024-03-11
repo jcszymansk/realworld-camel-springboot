@@ -4,13 +4,13 @@
 
   <from uri="direct:findArticle" />
 
-  <setProperty name="__article_id">
+  <setVariable name="__article_id">
     <groovy resultType="java.lang.Long">resource:classpath:scripts/resolve-slug.groovy</groovy>
-  </setProperty>
+  </setVariable>
 
   <setHeader name="CamelJpaParameters">
     <groovy>
-      [ id: exchange.properties.__article_id ]
+      [ id: variables.__article_id ]
     </groovy>
   </setHeader>
 
@@ -18,7 +18,7 @@
   <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a from Article a where a.id = :id
       &amp;singleResult=true${exchangeProperty.__xjpa_opts}" />
 
-  <removeProperty name="__article_id" />
+  <removeVariable name="__article_id" />
   <removeProperty name="__xjpa_opts" />
   <removeHeader name="CamelJpaParameters" />
 

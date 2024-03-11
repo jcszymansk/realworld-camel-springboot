@@ -6,14 +6,14 @@
 
   <to uri="direct:convertToMap" />
 
-  <setProperty name="updateArticle"><simple>${body[article]}</simple></setProperty>
+  <setVariable name="updateArticle"><simple>${body[article]}</simple></setVariable>
 
   <to uri="direct:findArticle" />
 
   <to uri="direct:verifyArticleAuthor" />
 
   <script><groovy><![CDATA[
-    exchange.properties.updateArticle.each {
+    variables.updateArticle.each {
       if (it.value != null && !it.value.blank) { request.body."${it.key}" = it.value }
     }
   ]]></groovy></script>

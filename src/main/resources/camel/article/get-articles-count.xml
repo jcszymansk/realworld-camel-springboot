@@ -8,13 +8,13 @@
       <removeHeader name="CamelJpaMaximumResults" />
       <removeHeader name="CamelJpaFirstResult" />
 
-      <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select count(a) ${exchangeProperty.__jpa_query}
-        &amp;singleResult=true&amp;outputTarget=property:__articlesCount" />
+      <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select count(a) ${variable.__jpa_query}
+        &amp;singleResult=true" variableReceive="__articlesCount" />
     </when>
     <otherwise>
-      <setProperty name="__articlesCount">
+      <setVariable name="__articlesCount">
         <groovy>request.body.size() + request.headers.CamelJpaFirstResult</groovy>
-      </setProperty>
+      </setVariable>
     </otherwise>
   </choice>
 

@@ -3,7 +3,7 @@
   <routeConfiguration id="verify-login">
     <interceptFrom uri="*">
       <when>
-        <simple>${exchangeProperty.loggedInUser} == null</simple>
+        <simple>${variable.loggedInUser} == null</simple>
       </when>
 
       <to uri="direct:verifyLogin" />
@@ -14,7 +14,7 @@
     <interceptFrom uri="*">
       <when>
         <simple><![CDATA[
-          ${exchangeProperty.loggedInUser} == null && ${header.Authorization} != null
+          ${variable.loggedInUser} == null && ${header.Authorization} != null
         ]]></simple>
       </when>
 

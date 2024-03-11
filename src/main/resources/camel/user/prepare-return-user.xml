@@ -4,13 +4,15 @@
     xmlns="http://camel.apache.org/schema/spring">
   <from uri="direct:prepareReturnUser" />
 
-  <setProperty name="__jwt_claims"><groovy><![CDATA[
+  <setVariable name="__jwt_claims"><groovy><![CDATA[
       """{"sub": "${request.body.username}" }"""
-    ]]></groovy></setProperty>
+    ]]></groovy></setVariable>
 
-  <to uri="jwt:HS256:Create?privateKeyLocation=classpath:jwt.key.txt&amp;source=.__jwt_claims&amp;target=__jwt_token" />
+  <to uri="jwt:HS256:Create?privateKeyLocation=classpath:jwt.key.txt"
+      variableSend="__jwt_claims"
+      variableReceive="__jwt_token" />
 
   <!-- to avoid checking whether I am following myself, which wouldn't be used anyway -->
-  <setHeader name="__me_follower"><constant>0</constant></setHeader>
+  <setVariable name="__me_follower"><constant>0</constant></setVariable>
 
 </route>

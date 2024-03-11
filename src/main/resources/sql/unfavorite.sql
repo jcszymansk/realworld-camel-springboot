@@ -1,3 +1,3 @@
 delete from favorites where
-  userid = :#${exchangeProperty.loggedInUser?.id} and
+  userid = :#${variable.loggedInUser?.id} and
   article = :#${body.id}

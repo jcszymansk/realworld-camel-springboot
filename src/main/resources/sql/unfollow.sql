@@ -1,3 +1,3 @@
 delete from follows where
-  follower = :#${exchangeProperty.loggedInUser?.id} and
+  follower = :#${variable.loggedInUser?.id} and
   followed = :#${body.id}

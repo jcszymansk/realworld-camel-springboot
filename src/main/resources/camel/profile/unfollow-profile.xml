@@ -8,9 +8,9 @@
 
     <to uri="sql:classpath:sql/unfollow.sql" />
 
-    <setHeader name="__me_follower">
+    <setVariable name="__me_follower">
       <constant resultType="java.lang.Integer">0</constant>
-    </setHeader>
+    </setVariable>
 
     <to uri="direct:returnUserProfile" />
 

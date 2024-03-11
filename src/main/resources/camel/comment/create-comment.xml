@@ -3,13 +3,14 @@
        routeConfigurationId="verify-login,generic-error">
   <from uri="direct:createArticleComment" />
 
+  <!-- FIXME it abuses __xjpa_opts, get rid and use variables to save and recover the comment -->
   <setProperty name="__xjpa_opts"><constant>&amp;outputTarget=property:__article</constant></setProperty>
   <to uri="direct:findArticle" />
 
   <setBody><groovy>
     com.github.jacekszymanski.realcamel.entity.Comment.builder()
       .body(request.body.comment.body)
-      .author(exchange.properties.loggedInUser)
+      .author(variables.loggedInUser)
       .article(exchange.properties.__article)
       .build()
   </groovy></setBody>

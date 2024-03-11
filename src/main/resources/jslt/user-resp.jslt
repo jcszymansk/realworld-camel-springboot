@@ -1,6 +1,6 @@
 {
   "user": . | {
-    "token": $headers.__jwt_token,
+    "token": $variables.__jwt_token,
     * - password : .
   }
 }

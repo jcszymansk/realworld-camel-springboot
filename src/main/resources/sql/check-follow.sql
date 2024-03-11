@@ -1,3 +1,3 @@
 select count(*) from follows where
-  follower = :#${exchangeProperty.loggedInUser?.id} and
-  followed = :#${exchangeProperty.__checkFollow.id}
+  follower = :#${variable.loggedInUser?.id} and
+  followed = :#${variable.checkFollow.id}

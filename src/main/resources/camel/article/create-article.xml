@@ -1,9 +1,9 @@
 <route id="direct_createArticle" routeConfigurationId="verify-login,generic-error,return-201" xmlns="http://camel.apache.org/schema/spring">
   <from uri="direct:createArticle" />
 
-  <setProperty name="__tags">
+  <setVariable name="__tags">
     <simple>${body.getArticle().getTagList()}</simple>
-  </setProperty>
+  </setVariable>
 
   <marshal><json /></marshal>
   <to uri="jslt:classpath:jslt/create-article-req2db.jslt" />
@@ -12,8 +12,8 @@
 
   <script>
     <groovy>
-      request.body.'author' = exchange.properties.'loggedInUser'
-      exchange.properties.'__tags'.each { request.body.addTag(it) }
+      request.body.'author' = variables.'loggedInUser'
+      variables.'__tags'.each { request.body.addTag(it) }
     </groovy>
   </script>
 

@@ -7,10 +7,10 @@
 
   <filter>
     <!-- it may be already set, and the check (database select) may be quite expensive -->
-    <simple>${header.__me_follower} == null</simple>
+    <simple>${variable.__me_follower} == null</simple>
 
-    <setProperty name="__checkFollow"><simple>${body}</simple></setProperty>
-    <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne&amp;outputHeader=__me_follower" />
+    <setVariable name="__checkFollow"><simple>${body}</simple></setVariable>
+    <to uri="sql:classpath:sql/check-follow.sql?outputType=SelectOne" variableReceive="__me_follower" />
   </filter>
 
 </route>

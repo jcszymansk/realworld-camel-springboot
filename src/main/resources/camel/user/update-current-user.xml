@@ -13,7 +13,7 @@
     </script>
 
     <setBody>
-      <exchangeProperty>loggedInUser</exchangeProperty>
+      <variable>loggedInUser</variable>
     </setBody>
 
     <to uri="direct:saveUser" />

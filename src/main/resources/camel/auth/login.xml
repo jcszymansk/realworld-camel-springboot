@@ -6,22 +6,22 @@
 
     <to uri="direct:convertToMap" />
 
-    <setProperty name="user">
+    <setVariable name="user">
       <simple>${body['user']}</simple>
-    </setProperty>
+    </setVariable>
 
     <!-- NOTE I don't use JPA singleResult here because it would be bad security practice to reveal
          whether the entered email address exists in the database or not.
       -->
-    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByEmail&amp;parameters.email=${exchangeProperty.user['email']}" />
+    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByEmail&amp;parameters.email=${variable.user['email']}" />
 
-    <log message="selected ${body} size ${body.size} login data ${exchangeProperty.user}" loggingLevel="DEBUG" />
+    <log message="selected ${body} size ${body.size} login data ${variable.user}" loggingLevel="DEBUG" />
 
     <filter>
       <groovy><![CDATA[
         import org.apache.commons.codec.digest.DigestUtils
 
-        body.size() == 0 || !body[0].password.equals(DigestUtils.sha256Hex(exchange.properties.user['password']))
+        body.size() == 0 || !body[0].password.equals(DigestUtils.sha256Hex(variables.user['password']))
       ]]></groovy>
 
       <throwException message="Bad login" exceptionType="com.github.jacekszymanski.realcamel.UnauthorizedException" />

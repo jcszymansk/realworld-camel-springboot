@@ -4,13 +4,13 @@
       <exception>jakarta.persistence.NonUniqueResultException</exception>
       <handled><constant>true</constant></handled>
 
-      <setHeader name="__ownErrorMessage">
+      <setVariable name="__ownErrorMessage">
         <groovy>
           'No such ' +
                 exchange.unitOfWork?.route?.routeId?.replaceFirst('^.*?([A-Z][a-z]+)$', '$1').toLowerCase() ?:
                'object'
         </groovy>
-      </setHeader>
+      </setVariable>
       <setHeader name="CamelHttpResponseCode">
         <constant>422</constant>
       </setHeader>

@@ -5,7 +5,7 @@
     <log message="auth ${header.Authorization}" loggingLevel="DEBUG" />
 
     <setBody>
-      <simple>${exchangeProperty.loggedInUser}</simple>
+      <simple>${variable.loggedInUser}</simple>
     </setBody>
 
     <to uri="direct:returnUser" />

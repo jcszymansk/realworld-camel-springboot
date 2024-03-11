@@ -7,8 +7,8 @@
 
   <to uri="direct:findArticle" />
 
-  <to uri="sql:classpath:sql/unfavorite.sql?outputHeader=__ignore" />
-  <removeHeader name="__ignore" />
+  <to uri="sql:classpath:sql/unfavorite.sql" variableReceive="ignore" />
+  <removeVariable name="ignore" />
 
   <to uri="direct:returnArticle" />
 

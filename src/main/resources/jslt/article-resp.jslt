@@ -22,10 +22,10 @@ def createslug(title, id)
   "article" : . | {
     "tagList" : sort([for (.tagList) .tag]),
     "slug": createslug(.title, .id),
-    "favoritesCount": $headers.__favorites.FAVORITES,
-    "favorited": ($headers.__favorites.MYFAVORITE == 1),
+    "favoritesCount": $variables.__favorites.FAVORITES,
+    "favorited": ($variables.__favorites.MYFAVORITE == 1),
     "author": .author | {
-      "following": ($headers.__me_follower == 1),
+      "following": ($variables.__me_follower == 1),
       * - password, email : .
     },
     * - id : .

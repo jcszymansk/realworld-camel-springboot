@@ -8,8 +8,8 @@
   <to uri="direct:findArticle" />
 
   <!-- TODO why language:sql: doesn't resolve? -->
-  <to uri="sql:classpath:sql/favorite.sql?outputHeader=__ignore" />
-  <removeHeader name="__ignore" />
+  <to uri="sql:classpath:sql/favorite.sql" variableReceive="ignore" />
+  <removeVariable name="ignore" />
 
   <to uri="direct:returnArticle" />
 

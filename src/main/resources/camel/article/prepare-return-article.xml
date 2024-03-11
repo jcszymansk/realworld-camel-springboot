@@ -4,10 +4,10 @@
     xmlns="http://camel.apache.org/schema/spring">
   <from uri="direct:prepareReturnArticle" />
 
-  <setProperty name="articleIds">
+  <setVariable name="articleIds">
     <groovy>[request.body.id]</groovy>
-  </setProperty>
+  </setVariable>
 
-  <to uri="sql:classpath:sql/favorites-for-articles.sql?outputHeader=__favorites&amp;outputType=SelectOne" />
+  <to uri="sql:classpath:sql/favorites-for-articles.sql?outputType=SelectOne" variableReceive="__favorites" />
 
 </route>

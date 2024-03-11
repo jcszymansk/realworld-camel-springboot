@@ -1,6 +1,6 @@
 <route id="direct_getArticlesFeed"
-  routeConfigurationId="verify-login,generic-error"
-  xmlns="http://camel.apache.org/schema/spring">
+       routeConfigurationId="verify-login,generic-error"
+       xmlns="http://camel.apache.org/schema/spring">
 
   <from uri="direct:getArticlesFeed" />
 
@@ -8,16 +8,16 @@
 
   <setHeader name="CamelJpaParameters">
     <groovy><![CDATA[
-      [ "userid": exchange.properties.loggedInUser.id ]
+      [ "userid": variables.loggedInUser.id ]
     ]]></groovy>
   </setHeader>
 
   <!-- FIXME refactor with get-articles, or get rid of the property and put the query in the toD -->
-  <setProperty name="__jpa_query">
+  <setVariable name="__jpa_query">
     <constant>from Article a, Follow f where a.author.id = f.followed.id and f.follower.id = :userid</constant>
-  </setProperty>
+  </setVariable>
 
-  <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a ${exchangeProperty.__jpa_query}
+  <toD uri="jpa:com.github.jacekszymanski.realcamel.entity.Article?query=select a ${variable.__jpa_query}
       order by a.updatedAt desc" />
 
   <log message="Found ${body.size} articles" />

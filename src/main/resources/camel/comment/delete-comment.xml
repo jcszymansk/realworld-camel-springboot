@@ -12,8 +12,8 @@
        But I think that the article author should be able to delete any comment. -->
   <filter>
     <simple><![CDATA[
-          ${body.author.id} != ${exchangeProperty.loggedInUser.id} &&
-          ${body.article.author.id} != ${exchangeProperty.loggedInUser.id}
+          ${body.author.id} != ${variables.loggedInUser.id} &&
+          ${body.article.author.id} != ${variables.loggedInUser.id}
     ]]></simple>
     <throwException message="To delete this comment you must be the author of the comment or the author of the article"
                     exceptionType="com.github.jacekszymanski.realcamel.RouteException" />

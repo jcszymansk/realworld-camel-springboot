@@ -1,7 +1,7 @@
 import com.github.jacekszymanski.realcamel.entity.User
 import org.apache.commons.codec.digest.DigestUtils
 
-User user = exchange.properties['loggedInUser']
+User user = variables.loggedInUser
 Map newValues = request.body['user']
 
 if (newValues.password) {

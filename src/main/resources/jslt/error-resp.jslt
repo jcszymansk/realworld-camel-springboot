@@ -1,5 +1,5 @@
-let own = $headers.__ownErrorMessage
-let msgs = $headers.__exceptionMessages
+let own = $variables.__ownErrorMessage
+let msgs = $variables.__exceptionMessages
 let body =
   if ($own == null)
     $msgs

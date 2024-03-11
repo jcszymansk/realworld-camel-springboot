@@ -1,6 +1,6 @@
 {
   "profile" : . | {
-    "following": ($headers.__me_follower == 1),
+    "following": ($variables.__me_follower == 1),
     * - password, email : .
   }
 }

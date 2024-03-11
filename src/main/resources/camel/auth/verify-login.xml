@@ -9,10 +9,12 @@
                       exceptionType="com.github.jacekszymanski.realcamel.UnauthorizedException" />
     </filter>
 
-    <to uri="jwt:HS256:Decode?privateKeyLocation=classpath:jwt.key.txt&amp;source=Authorization&amp;target=.jwt_token&amp;outputType=Map" />
+    <to uri="jwt:HS256:Decode?privateKeyLocation=classpath:jwt.key.txt&amp;source=Authorization&amp;outputType=Map"
+          variableReceive="jwt_token"/>
 
-    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${exchangeProperty.jwt_token['sub']}&amp;singleResult=true&amp;outputTarget=property:loggedInUser" />
+    <to uri="jpa:com.github.jacekszymanski.realcamel.entity.User?namedQuery=selectByUsername&amp;parameters.username=${variable.jwt_token['sub']}&amp;singleResult=true"
+          variableReceive="loggedInUser" />
 
-    <removeProperty name="jwt_token" />
+    <removeVariable name="jwt_token" />
   </route>
 </routes>

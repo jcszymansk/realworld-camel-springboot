@@ -9,6 +9,9 @@ camel:
     mapping:
       contextPath: /api/*
 
+  rest:
+    inline-routes: false
+
 spring:
 
   datasource:

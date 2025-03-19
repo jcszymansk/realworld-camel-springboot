@@ -2,9 +2,9 @@
 
   <routeConfiguration id="verify-login">
     <interceptFrom uri="*">
-      <when>
+      <onWhen>
         <simple>${variable.loggedInUser} == null</simple>
-      </when>
+      </onWhen>
 
       <to uri="direct:verifyLogin" />
     </interceptFrom>
@@ -12,11 +12,11 @@
 
   <routeConfiguration id="maybe-verify-login">
     <interceptFrom uri="*">
-      <when>
+      <onWhen>
         <simple><![CDATA[
           ${variable.loggedInUser} == null && ${header.Authorization} != null
         ]]></simple>
-      </when>
+      </onWhen>
 
       <to uri="direct:verifyLogin" />
     </interceptFrom>

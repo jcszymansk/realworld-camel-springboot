@@ -5,16 +5,16 @@
 
   <groupId>com.github.jacekszymanski</groupId>
   <artifactId>realworld-camel-springboot</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1</version>
 
   <properties>
     <java.version>17</java.version>
     <openapi.generator.maven.plugin.apiPackage>com.github.jacekszymanski.realcamel.api</openapi.generator.maven.plugin.apiPackage>
     <openapi.generator.maven.plugin.modelPackage>com.github.jacekszymanski.realcamel.model</openapi.generator.maven.plugin.modelPackage>
     <log4j2.version>2.22.1</log4j2.version>
-    <camel.version>4.4.0</camel.version>
-    <spring-boot.version>3.2.2</spring-boot.version>
-    <camel-jwt.version>0.2.0</camel-jwt.version>
+    <camel.version>4.10.2</camel.version>
+    <spring-boot.version>3.4.3</spring-boot.version>
+    <camel-jwt.version>0.2.1</camel-jwt.version>
   </properties>
 
   <dependencyManagement>
@@ -241,8 +241,8 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
-          <source>8</source>
-          <target>8</target>
+          <source>17</source>
+          <target>17</target>
         </configuration>
       </plugin>
 

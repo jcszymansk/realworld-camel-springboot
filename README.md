@@ -74,6 +74,16 @@ script), otherwise the application won't start. No automatic database upgrade is
 
 As of now, camel variables are not used. This will be fixed in the next update, hopefully in a few days.
 
+update: used since 2024-03-12
+
+#### Update 2025-03-20
+
+A year later, I have updated the project to use the latest Camel version,
+that is 4.10.2; also fixed in the POM the requirement to use Java 17.
+
+From now on, I expect to update the project to every other Camel LTS release,
+which should be about once a year.
+
 # How to run
 
 To run this example you need to have Java 17 and Maven installed.
